@@ -1,31 +1,23 @@
 package com.assessment;
 
-public class Admin extends Person implements AdminTools{
+public class Admin extends Person{
 
-
-    private String password;
     private Student student;
-    private Tutor tutor;
+    private Lecturer lecturer;
     private CollegeBranch collegeBranch;
-    private Courses courses;
+    private Module module;
+    private Course course;
 
+    public Admin(String first_name, String last_name, String gender, String phone, String dob, String emailAddress, String username, String password) {
+        super(first_name, last_name, gender, phone, dob, emailAddress, username, password);
+    }
 
-    public Admin(String first_name, String second_name, String emailAddress, String password) {
-        super(first_name, second_name, emailAddress);
-        this.password = password;
+    public Admin(String first_name, String last_name) {
+        super(first_name, last_name);
     }
 
 
-    public String getPassword() {
-        return password;
-    }
-
-
-    // -> admin creates branches, tutors, students and classes
-
-
-    @Override
-    public CollegeBranch create_branch (String unit, String address) {
+    public CollegeBranch createBranch(String unit, String address) {
 
         collegeBranch = new CollegeBranch(unit, address);
 
@@ -33,68 +25,82 @@ public class Admin extends Person implements AdminTools{
 
     }
 
+    public Lecturer createLecturer(String first_name, String last_name, String gender, String phone, String dob, String emailAddress,
+                                   String username, String password, Module module, CollegeBranch collegeBranch) throws Exception {
 
-    @Override
-    public Student create_students (String first_name, String last_name, String emailAddress, String password, String username) {
+        lecturer = new Lecturer(first_name, last_name, gender, phone, dob, emailAddress, username, password, module, collegeBranch);
+        module.getCourse().getListOfLecturersCourse().add(lecturer);
+        collegeBranch.getListOfLecturers().add(lecturer);
 
-        student = new Student(first_name, last_name, emailAddress, password, username);
+        return lecturer;
+    }
+
+    public Lecturer createLecturer(String first_name, String last_name, CollegeBranch collegeBranch) {
+
+        lecturer = new Lecturer(first_name, last_name, collegeBranch);
+
+        return lecturer;
+    }
+
+    public Student createStudents(String first_name, String last_name, String gender, String phone, String dob,
+                                  String emailAddress, String username, String password, CollegeBranch collegeBranch, Course course, boolean isPaidFull) {
+
+        student = new Student(first_name, last_name, gender, phone, dob, emailAddress, username, password, collegeBranch, course, isPaidFull);
+        module.getCourse().getListOfStudentsCourse().add(student);
+        collegeBranch.getListOfStudents().add(student);
         return student;
 
     }
 
+    public Student createStudents(String first_name, String last_name) {
 
-    @Override
-    public Tutor create_tutor(String first_name, String last_name, String emailAddress, String password, String subject) {
-
-        tutor = new Tutor(first_name, last_name, emailAddress, password, subject);
-        return tutor;
-    }
-
-    @Override
-    public Courses create_branch_class(CollegeBranch collegeBranch, Tutor tutor) {
-
-        courses = new Courses(collegeBranch, tutor);
-        return courses;
+        student = new Student(first_name, last_name);
+        return student;
 
     }
 
-    // --> adding students to the classes
+    public Module createModule(String subject, Course course, CollegeBranch collegeBranch, String weekDay, String classHour) {
+        module = new Module(subject, course, collegeBranch, weekDay, classHour);
+
+        return module;
+    }
+
+    public Course createCourse(CollegeBranch collegeBranch, String name, Double price) {
+        course = new Course(collegeBranch, name, price);
+        return course;
+    }
+
+    public void addStudentToModule(Module module, Student s) throws Exception {
 
 
-    @Override
-    public void add_student_to_class(Student student, CollegeBranch collegeBranch, Courses courses) {
+        if (module.getCourse().getCollegeBranch().getUnit().equalsIgnoreCase(s.getCollegeBranch().getUnit())) {
+            module.getListOfStudentsModule().add(s);
+            s.getTimetable().add(module);
 
-
-        if (courses.getCollegeBranch().getUnit().equalsIgnoreCase(courses.getCollegeBranch().getUnit())) {
-            student.getTimetable().add(courses);
-
-            courses.getList_of_students().add(student);
         } else {
-            System.out.println("ERROR - THE UNIT DOESN'T HAVE THIS CLASS");
+            throw new Exception("This module doesn't exist in this Branch" + s.getFirstName() + " " + module.getSubject());
         }
 
-//		ArrayList<BranchClass> listClasses = new ArrayList<>();
-//		listClasses = collegeBranch.getListOfClasses();
-//
-//
-//		for (int i = 0; i < listClasses.size(); i++) {
-//
-//			if(listClasses.get(i).equals(branchClass)) {
-//				collegeBranch.getListOfClasses().get(i).getList_of_students().add(student);
-//				student.getTimetable().add(branchClass);
-//				break;
-//			}
-//
-//		}
-
 
     }
 
+    // Add payment to student
+    public void addPayment(Student s){
 
+        int count = 0;
 
+        for (int i = 0; i< s.getFees().size(); i++){
+            count++;
+            if (s.getFees().get(i) !=0.0){
+                s.getFees().set(i, 0.0);
+                break;
+            }
 
+        }
+        if (count == s.getFees().size()){
+            System.out.println("THE FEES ARE ALL PAID. NO NEED TO ADD PAYMENT!!!");
+        }
 
-
-
+    }
 
 }

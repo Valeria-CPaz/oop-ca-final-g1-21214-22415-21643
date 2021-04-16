@@ -6,70 +6,101 @@ import java.util.Map;
 
 public class Student extends Person{
 
-    private String username;
-    private String password;
     private HashMap<String, Double> grades = new HashMap<String, Double>();
-    private ArrayList<Courses> timetable = new ArrayList<Courses>();
+    private ArrayList<Module> timetable = new ArrayList<>();
+    private ArrayList<Double> fees = new ArrayList<>();
+    private CollegeBranch collegeBranch;
+    private Course course;
+    private boolean isPaidFull;
 
-
-
-    public Student (String first_name, String last_name, String emailAddress, String password, String username) {
-        super (first_name, last_name, emailAddress);
-        this.password = password;
-        this.username = username;
+    public Student(String first_name, String last_name, String gender, String phone, String dob,
+                   String emailAddress, String username, String password, CollegeBranch collegeBranch, Course course, boolean isPaidFull) {
+        super(first_name, last_name, gender, phone, dob, emailAddress, username, password);
+        this.collegeBranch = collegeBranch;
+        this.course = course;
+        this.isPaidFull = isPaidFull;
+        setInstallments(6);
     }
 
+    public Student(String first_name, String last_name) {
+        super(first_name, last_name);
 
 
-    public String getUsername() {
-        return username;
     }
 
-
-
-    public String getPassword() {
-        return password;
+    public CollegeBranch getCollegeBranch() {
+        return collegeBranch;
     }
-
-
 
     public HashMap<String, Double> getGrades() {
         return grades;
     }
 
+    public ArrayList<Double> getFees() {
+        return fees;
+    }
 
+    public Course getCourse() {
+        return course;
+    }
 
-    public ArrayList<Courses> getTimetable() {
+    public boolean isPaidFull() {
+        return isPaidFull;
+    }
+
+    public ArrayList<Module> getTimetable() {
         return timetable;
     }
 
-    void print_grades() {
+    public void printTimetable(){
+        System.out.println("--- TIMETABLE ---");
+        for (int i = 0; i < getTimetable().size(); i++){
+            System.out.println(getTimetable().get(i).getSubject()+": " + getTimetable().get(i).getClassHour());
+        }
+    }
 
+    public void printGrades(){
 
-        System.out.println(getFirst_name() + " " + getLast_name() + " grades:");
+        System.out.println(getFirstName() + " " + getLastName() + " grades:");
         System.out.println("----------------------");
 
         for (Map.Entry<String, Double> entry : getGrades().entrySet()) {
             System.out.println(entry.getKey()+" : "+entry.getValue());
         }
-
-
     }
 
-    void print_timetable () {
+    // FEES MANAGEMENT
+    private void setInstallments(int installments){
 
+        if(isPaidFull()){
+            for (int i = 0; i < installments; i++) {
+                getFees().add(0.0);
+            }
+        } else {
+            Double installment = getCourse().getPrice() / installments;
 
-        System.out.println(getFirst_name() + " " + getLast_name() + " Timetable:");
-        System.out.println("----------------------\n\n");
-
-        for (int i = 0; i < getTimetable().size(); i++) {
-            System.out.println("Tutor: " + getTimetable().get(i).getTutor().getFirst_name() + " " + getTimetable().get(i).getTutor().getLast_name());
-            System.out.println("Subject: " + getTimetable().get(i).getTutor().getSubject());
-            System.out.println("----------------------");
+            for (int i = 0; i < installments; i++) {
+                getFees().add(installment);
+            }
         }
 
     }
 
+    public void printFees(){
+        int count = 0;
+        for (Double a : getFees()){
+            if (a!=0){
+                count++;
+            }
+        }
 
+        if(count == 0){
+            System.out.println("ALL FEES ARE PAID!");
+        } else {
+            for (int i = 1; i<= getFees().size(); i++){
+                System.out.println("Fee " + i + ": €" + getFees().get(i-1));
+            }
+        }
 
+    }
 }
