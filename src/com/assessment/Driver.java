@@ -42,13 +42,13 @@ public class Driver {
         admin.addStudentToModule(maths, student);
         secondLecturer.setGrade(8.0, student);
         firstLecturer.setGrade(7.0, student);
-
-        admin.addPayment(student);
-        admin.addPayment(student);
-        admin.addPayment(student);
-        admin.addPayment(student);
-        admin.addPayment(student);
-        admin.addPayment(student);
+//
+//        admin.addPayment(student);
+//        admin.addPayment(student);
+//        admin.addPayment(student);
+//        admin.addPayment(student);
+//        admin.addPayment(student);
+//        admin.addPayment(student);
 
 
         student.printFees();
