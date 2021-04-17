@@ -2,65 +2,62 @@ package com.assessment;
 
 public class Driver {
 
+    void run() throws Exception {
 
-    public Driver () {
+        // first: create administrator
 
-    }
+        Admin admin = new Admin("Marcus", "Moura", "male", "12345678", "20.06.1995", "marcus@moura.ie", "mafr",
+                "123456" );
 
-    public void run() {
+        // admin creates a College Branch
+        CollegeBranch branchOne = admin.createBranch("I", "Dorset Street");
+        CollegeBranch branchTwo = admin.createBranch("II", "Abbey Street");
 
-        // --> Create Administrator
+        // admin creates a course
+        Course scienceInComputing= admin.createCourse(branchOne, "Science in Computing", 4500.00);
+        Course business = admin.createCourse(branchTwo, "Business", 5000.00);
 
-        Admin administrator = new Admin("One", "Above all","abcd@efgh.com", "abc123");
+        // admin creates a module for the course
+        Module programming = admin.createModule("Programming", scienceInComputing, branchOne, "Monday", "16:00");
+        Module marketing = admin.createModule("Marketing", business, branchTwo, "Friday", "12:45");
+        Module maths = admin.createModule("Maths", scienceInComputing, branchOne, "Tuesday", "09:00");
 
-        // --> Create college branch
+        // admin creates a lecturer and automatically adds him to the respective module (check lecturer class)
+        Lecturer firstLecturer = admin.createLecturer("John", "Rowley", "male", "142536789",
+                "02.04.1950", "john@rowley.ie", "joro",
+                "123456", programming, branchOne);
 
-        CollegeBranch cb1 = administrator.create_branch("First Unit", "Gardiner Street");
+        Lecturer secondLecturer = admin.createLecturer("Annette", "Forster", "female", "14563214", "14.08.1970",
+                "annette@forster.ie", "anfor", "145632", maths, branchOne);
 
-
-
-        // --> Create Student
-        Student student1 = administrator.create_students("Marcus", "Moura", "abcd@efgh.com","abcd1234", "marvin");
-
-
-        // --> Create Tutor
-
-        Tutor tutor1 = administrator.create_tutor("John", "Rowley","abcd@efgh.com", "tutorPass", "Programming");
-        Tutor tutor2 = administrator.create_tutor("Annette", "Forster", "abcd@efgh.com","tutor2Pass", "Maths");
-        Tutor tutor3 = administrator.create_tutor("Wenhao", "Fu", "abcd@efgh.com","tutor3Pass", "Database");
-
-
-        // --> Create Classes
-
-        Courses firstClass = administrator.create_branch_class(cb1, tutor1);
-        Courses secondClass = administrator.create_branch_class(cb1, tutor2);
-        Courses thirdClass = administrator.create_branch_class(cb1, tutor3);
+        Lecturer thirdLecturer = admin.createLecturer("Rosana", "RastaPe", "female", "14563214", "14.08.1980",
+                "rosana@rasta.ie", "rora", "145632", marketing, branchTwo);
 
 
+        Student student = admin.createStudents("Valeria", "Paz", "female", "789456123",
+                "05.08.1989", "val@paz.ie", "valparaiso", "142536",
+                branchOne, scienceInComputing, false);
 
-        // --> Add student to classes
+        admin.addStudentToModule(programming, student);
+        admin.addStudentToModule(maths, student);
+        secondLecturer.setGrade(8.0, student);
+        firstLecturer.setGrade(7.0, student);
 
-        administrator.add_student_to_class(student1, cb1, firstClass);
-        administrator.add_student_to_class(student1, cb1, secondClass);
-        administrator.add_student_to_class(student1, cb1, thirdClass);
-
-        // --> Tutors put grades
-
-        tutor1.putGrade(student1, 10.0);
-        tutor2.putGrade(student1, 9.00);
-        tutor3.putGrade(student1, 8.0);
-
-//         --> Student prints grades
-
-        student1.print_grades();
-
-        // --> Student prints timetable
+        admin.addPayment(student);
+        admin.addPayment(student);
+        admin.addPayment(student);
+        admin.addPayment(student);
+        admin.addPayment(student);
+        admin.addPayment(student);
 
 
-//        student1.print_timetable();
+        student.printFees();
+
+        admin.printListOfBranches();
 
 
-
+//        student.printGrades();
+//        student.printTimetable();
 
     }
 }
