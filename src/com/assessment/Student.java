@@ -12,6 +12,8 @@ public class Student extends Person{
     private CollegeBranch collegeBranch;
     private Course course;
     private boolean isPaidFull;
+    private ArrayList<Assignment> listOfAssignments = new ArrayList<>();
+
 
     public Student(String first_name, String last_name, String gender, String phone, String dob,
                    String emailAddress, String username, String password, CollegeBranch collegeBranch, Course course, boolean isPaidFull) {
@@ -26,6 +28,10 @@ public class Student extends Person{
         super(first_name, last_name);
 
 
+    }
+
+    public ArrayList<Assignment> getListOfAssignments() {
+        return listOfAssignments;
     }
 
     public CollegeBranch getCollegeBranch() {

@@ -63,10 +63,13 @@ public class Lecturer extends Person implements LecturerTools {
     public Assignment createAssignment(String dueDate, String description) {
 
         Assignment assignment = new Assignment(dueDate, description, (getFirstName() + " " + getLastName()), getModule());
+        getModule().getListOfAssignments().add(assignment);
+
+        for (int i = 0; i < getModule().getListOfStudentsModule().size(); i++){
+            getModule().getListOfStudentsModule().get(i).getListOfAssignments().add(assignment);
+        }
 
         return assignment;
-
-
     }
 
     @Override

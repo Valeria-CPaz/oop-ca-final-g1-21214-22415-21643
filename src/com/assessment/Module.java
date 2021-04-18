@@ -11,6 +11,8 @@ public class Module {
     private ArrayList<Student> listOfStudentsModule = new ArrayList<>();
     private String weekDay;
     private String classHour;
+    private ArrayList<Assignment> listOfAssignments = new ArrayList<>();
+
 
     public Module(String subject, Course course, CollegeBranch collegeBranch, String weekDay, String classHour) {
         this.subject = subject;
@@ -30,6 +32,10 @@ public class Module {
 
     public String getClassHour() {
         return classHour;
+    }
+
+    public ArrayList<Assignment> getListOfAssignments() {
+        return listOfAssignments;
     }
 
     public CollegeBranch getCollegeBranch() {
