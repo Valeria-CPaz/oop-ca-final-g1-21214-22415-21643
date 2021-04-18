@@ -1,6 +1,5 @@
 package com.assessment;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +25,6 @@ public class Lecturer extends Person implements LecturerTools {
         super(first_name, last_name);
         this.collegeBranch = collegeBranch;
     }
-
 
 
     public Module getModule() {
@@ -65,7 +63,7 @@ public class Lecturer extends Person implements LecturerTools {
         Assignment assignment = new Assignment(dueDate, description, (getFirstName() + " " + getLastName()), getModule());
         getModule().getListOfAssignments().add(assignment);
 
-        for (int i = 0; i < getModule().getListOfStudentsModule().size(); i++){
+        for (int i = 0; i < getModule().getListOfStudentsModule().size(); i++) {
             getModule().getListOfStudentsModule().get(i).getListOfAssignments().add(assignment);
         }
 
@@ -93,4 +91,6 @@ public class Lecturer extends Person implements LecturerTools {
 
         return getGrades;
     }
+
 }
+
