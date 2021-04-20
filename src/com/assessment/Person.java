@@ -8,17 +8,17 @@ public abstract class Person {
     private String phone;
     private String dob;
     private String emailAddress;
-    private String username;
+    private String id;
     private String password;
 
-    public Person(String firstName, String lastName, String gender, String phone, String dob, String emailAddress, String username, String password) {
+    public Person(String firstName, String lastName, String gender, String phone, String dob, String emailAddress, String id, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.phone = phone;
         this.dob = dob;
         this.emailAddress = emailAddress;
-        this.username = username;
+        this.id = id;
         this.password = password;
     }
 
@@ -51,8 +51,8 @@ public abstract class Person {
         return dob;
     }
 
-    public String getUsername() {
-        return username;
+    public String getId() {
+        return id;
     }
 
     public String getPassword() {
