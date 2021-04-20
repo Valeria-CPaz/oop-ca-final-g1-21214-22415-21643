@@ -32,25 +32,20 @@ public class Driver {
 
         admin.createLecturer("John", "Rowley", "male", "142536789",
                 "02.04.1950", "john@rowley.ie", "joro",
-                "123456", admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0),
-                admin.getListOfBranches().get(0));
+                "123456", "Computer Science", "programming", "I");
 
         admin.createLecturer("Annette", "Forster", "female", "14563214", "14.08.1970",
-                "annette@forster.ie", "anfor", "145632",
-                admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(1),
-                admin.getListOfBranches().get(0));
+                "annette@forster.ie", "anfor", "145632", "science in computing", "maths", "I");
 
         admin.createLecturer("Rosana", "RastaPe", "female", "14563214", "14.08.1980",
-                "rosana@rasta.ie", "rora", "145632",
-                admin.getListOfBranches().get(1).getListOfCourses().get(0).getListOfModulesCourse().get(0),
-                admin.getListOfBranches().get(1));
+                "rosana@rasta.ie", "rora", "145632", "business", "marketing", "II");
 
         // CREATES STUDENT
 
         Student s = admin.createStudents("Peter", "Parker", "male", "789456123",
                 "05.08.1989", "peter@parker.ie", "spiderman", "142536",
-                admin.getListOfBranches().get(0),
-                admin.getListOfBranches().get(0).getListOfCourses().get(0), false, 6);
+                "I",
+                "Science in Computing", false, 6);
 
 
 
@@ -64,21 +59,21 @@ public class Driver {
 
 
 
-        admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer().setGrade(10.0,
-                admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getListOfStudentsModule().get(0));
+//        admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer().setGrade(10.0,
+//                admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getListOfStudentsModule().get(0));
 
 //        s.printGrades();
 //        System.out.println("\n");
 //        s.printFees();
 
-        System.out.println(admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer());
+//        System.out.println(admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer());
+//
+//        admin.deleteLecturer(admin.getListOfBranches().get(0).getListOfLecturers().get(0), admin.getListOfBranches().get(0).getListOfCourses().get(0));
+//
+//        System.out.println(admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer());
 
-        admin.deleteLecturer(admin.getListOfBranches().get(0).getListOfLecturers().get(0), admin.getListOfBranches().get(0).getListOfCourses().get(0));
 
-        System.out.println(admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer());
-
-
-
+        System.out.println(s.getCourse().getName());
 
 
 
