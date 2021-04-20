@@ -67,15 +67,15 @@ public class Driver {
         admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer().setGrade(10.0,
                 admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getListOfStudentsModule().get(0));
 
-//        s.printGrades();
-//        System.out.println("\n");
-//        s.printFees();
+        s.printGrades();
+        System.out.println("\n");
+        s.printFees();
 
-        System.out.println(admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer());
-
-        admin.deleteLecturer(admin.getListOfBranches().get(0).getListOfLecturers().get(0), admin.getListOfBranches().get(0).getListOfCourses().get(0));
-
-        System.out.println(admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer());
+        System.out.println(admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer().getFirstName());
+//
+//        admin.deleteLecturer(admin.getListOfBranches().get(0).getListOfLecturers().get(0), admin.getListOfBranches().get(0).getListOfCourses().get(0));
+//
+//        System.out.println(admin.getListOfBranches().get(0).getListOfCourses().get(0).getListOfModulesCourse().get(0).getLecturer());
 
 
 
