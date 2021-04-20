@@ -21,7 +21,6 @@ public class Student extends Person{
         this.collegeBranch = collegeBranch;
         this.course = course;
         this.isPaidFull = isPaidFull;
-        setInstallments(6);
     }
 
     public Student(String first_name, String last_name) {
@@ -58,6 +57,8 @@ public class Student extends Person{
         return timetable;
     }
 
+    // PRINTING TIMETABLE
+
     public void printTimetable(){
         System.out.println("--- TIMETABLE ---");
         for (int i = 0; i < getTimetable().size(); i++){
@@ -65,6 +66,7 @@ public class Student extends Person{
         }
     }
 
+    // PRINTING GRADES
     public void printGrades(){
 
         System.out.println(getFirstName() + " " + getLastName() + " grades:");
@@ -76,23 +78,12 @@ public class Student extends Person{
     }
 
     // FEES MANAGEMENT
-    private void setInstallments(int installments){
 
-        if(isPaidFull()){
-            for (int i = 0; i < installments; i++) {
-                getFees().add(0.0);
-            }
-        } else {
-            Double installment = getCourse().getPrice() / installments;
-
-            for (int i = 0; i < installments; i++) {
-                getFees().add(installment);
-            }
-        }
-
-    }
 
     public void printFees(){
+
+        System.out.println("COLLEGE FEES: ");
+
         int count = 0;
         for (Double a : getFees()){
             if (a!=0){
