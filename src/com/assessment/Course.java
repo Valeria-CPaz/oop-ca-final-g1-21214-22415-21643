@@ -10,6 +10,7 @@ public class Course {
     private ArrayList<Student> listOfStudentsCourse = new ArrayList<>();
     private ArrayList<Module> listOfModulesCourse = new ArrayList<>();
     private Double price;
+    private Lecturer lecturer;
 
     public Course(CollegeBranch collegeBranch, String name, Double price) {
         this.collegeBranch = collegeBranch;
@@ -41,9 +42,9 @@ public class Course {
         return listOfStudentsCourse;
     }
 
-    public void setListOfStudentsCourse(ArrayList<Student> listOfStudentsCourse) {
-        this.listOfStudentsCourse = listOfStudentsCourse;
-    }
+//    public void setListOfStudentsCourse(ArrayList<Student> listOfStudentsCourse) {
+//        this.listOfStudentsCourse = listOfStudentsCourse;
+//    }
 
     public ArrayList<Module> getListOfModulesCourse() {
         return listOfModulesCourse;
@@ -51,5 +52,14 @@ public class Course {
 
     public void setListOfModulesCourse(ArrayList<Module> listOfModulesCourse) {
         this.listOfModulesCourse = listOfModulesCourse;
+    }
+
+    public void printListModules(){
+
+        for(Module m: getListOfModulesCourse()){
+            System.out.println("Module: " + m.getSubject());
+//            System.out.println("Lecturer: "+ m.getLecturer().getFirstName()+ " "+ m.getLecturer().getLastName());
+            System.out.println("Class day and Hour: " + m.getWeekDay() +  " at " + m.getClassHour());
+        }
     }
 }

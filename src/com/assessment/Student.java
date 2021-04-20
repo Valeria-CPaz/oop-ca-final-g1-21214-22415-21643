@@ -13,6 +13,8 @@ public class Student extends Person{
     private Course course;
     private boolean isPaidFull;
     private ArrayList<Assignment> listOfAssignments = new ArrayList<>();
+    private ArrayList<Exam> listOfExams = new ArrayList<>();
+
 
 
     public Student(String first_name, String last_name, String gender, String phone, String dob,
@@ -49,6 +51,10 @@ public class Student extends Person{
         return course;
     }
 
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
     public boolean isPaidFull() {
         return isPaidFull;
     }
@@ -57,13 +63,20 @@ public class Student extends Person{
         return timetable;
     }
 
+    public ArrayList<Exam> getListOfExams() {
+        return listOfExams;
+    }
+
     // PRINTING TIMETABLE
 
     public void printTimetable(){
         System.out.println("--- TIMETABLE ---");
+
         for (int i = 0; i < getTimetable().size(); i++){
-            System.out.println(getTimetable().get(i).getSubject()+": " + getTimetable().get(i).getClassHour());
+            System.out.println(getTimetable().get(i).getSubject()+": on " + getTimetable().get(i).getWeekDay()+ " at " + getTimetable().get(i).getClassHour());
+            System.out.println("Lecturer: " + getTimetable().get(i).getLecturer().getFirstName()+" "+ getTimetable().get(i).getLecturer().getLastName());
         }
+        System.out.println();
     }
 
     // PRINTING GRADES

@@ -73,15 +73,66 @@ public class Admin extends Person {
 
     }
 
+    // DELETING COURSES LECTURERS AND STUDENTS
+
+    public void deleteStudent(Student student, CollegeBranch collegeBranch){
+
+        collegeBranch.getListOfStudents().remove(student);
+        student.getCourse().getListOfStudentsCourse().remove(student);
+
+        for (Module m: student.getCourse().getListOfModulesCourse()){
+            m.getListOfStudentsModule().remove(student);
+        }
+
+    }
+
+    public void deleteCourse(CollegeBranch collegeBranch, Course course){
+
+
+        for (Student s: course.getListOfStudentsCourse()){
+            s.setCourse(null);
+        }
+
+        for (Module m: course.getListOfModulesCourse()){
+            deleteModule(course, m);
+        }
+
+        collegeBranch.getListOfCourses().remove(course);
+
+
+
+    }
+
+    public void deleteModule(Course c, Module m){
+
+        c.getListOfModulesCourse().remove(m);
+
+    }
+
+    public void deleteLecturer(Lecturer l, Course c){
+
+        l.getModule().setLecture(null);
+        l.getModule().getCourse().getListOfLecturersCourse().remove(l);
+        l.getCollegeBranch().getListOfLecturers().remove(l);
+
+    }
+
     // CREATING MODULES AND COURSES - ADDING STUDENTS TO MODULES
     public Module createModule(String subject, Course course, CollegeBranch collegeBranch, String weekDay, String classHour) {
+
         module = new Module(subject, course, collegeBranch, weekDay, classHour);
+
+        course.getListOfModulesCourse().add(module);
+
 
         return module;
     }
 
     public Course createCourse(CollegeBranch collegeBranch, String name, Double price) {
+
         course = new Course(collegeBranch, name, price);
+        collegeBranch.getListOfCourses().add(course);
+
         return course;
     }
 

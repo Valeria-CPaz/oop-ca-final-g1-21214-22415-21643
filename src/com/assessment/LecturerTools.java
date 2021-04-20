@@ -7,4 +7,7 @@ public interface LecturerTools {
     void deleteAssignment(Assignment assignment);
     void editAssignment(Assignment assignment, String dueDate, String description);
     String getStudentGrade(Student student);
+    void createExam(String date);
+    void editExam(Exam e, String date);
+
 }

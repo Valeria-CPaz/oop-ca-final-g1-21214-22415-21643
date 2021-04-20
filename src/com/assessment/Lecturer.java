@@ -9,6 +9,7 @@ public class Lecturer extends Person implements LecturerTools {
     private CollegeBranch collegeBranch;
 
 
+
     public Lecturer(String first_name, String last_name, String gender, String phone, String dob, String emailAddress,
                     String username, String password, Module module, CollegeBranch collegeBranch) throws Exception {
         super(first_name, last_name, gender, phone, dob, emailAddress, username, password);
@@ -126,6 +127,45 @@ public class Lecturer extends Person implements LecturerTools {
         }
 
         return getGrades;
+    }
+
+    // CREATING and EDITING EXAMS
+
+    @Override
+    public void createExam(String date) {
+
+        Exam e = new Exam(date, (getFirstName()+" "+getLastName()), getModule());
+
+        getModule().getListOfExams().add(e);
+
+        for (Student s: module.getListOfStudentsModule()){
+            s.getListOfExams().add(e);
+        }
+
+    }
+
+    @Override
+    public void editExam(Exam e, String date) {
+
+        for (int i = 0; i< getModule().getListOfAssignments().size(); i++){
+            if (getModule().getListOfExams().get(i).equals(e)){
+
+                getModule().getListOfExams().get(i).setDate(date);
+                break;
+            }
+        }
+
+        for(Student s : getModule().getListOfStudentsModule()){
+            for (int i = 0; i< s.getListOfAssignments().size(); i++){
+                if(s.getListOfExams().get(i).equals(e)){
+
+                    s.getListOfExams().get(i).setDate(date);
+                }
+            }
+        }
+
+
+
     }
 
 }

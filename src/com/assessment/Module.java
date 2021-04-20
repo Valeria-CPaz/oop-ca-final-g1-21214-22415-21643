@@ -4,6 +4,7 @@ package com.assessment;
 import java.util.ArrayList;
 
 public class Module {
+
     private String subject;
     private Course course;
     private CollegeBranch collegeBranch;
@@ -12,6 +13,7 @@ public class Module {
     private String weekDay;
     private String classHour;
     private ArrayList<Assignment> listOfAssignments = new ArrayList<>();
+    private ArrayList<Exam> listOfExams = new ArrayList<>();
 
 
     public Module(String subject, Course course, CollegeBranch collegeBranch, String weekDay, String classHour) {
@@ -58,5 +60,7 @@ public class Module {
         this.lecturer = lecture;
     }
 
-
+    public ArrayList<Exam> getListOfExams() {
+        return listOfExams;
+    }
 }
