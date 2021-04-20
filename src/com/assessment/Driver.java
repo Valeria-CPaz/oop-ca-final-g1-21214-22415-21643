@@ -36,14 +36,14 @@ public class Driver {
 
         Student student = admin.createStudents("Valeria", "Paz", "female", "789456123",
                 "05.08.1989", "val@paz.ie", "valparaiso", "142536",
-                branchOne, scienceInComputing, false);
+                branchOne, scienceInComputing, false, 1);
 
         admin.addStudentToModule(programming, student);
         admin.addStudentToModule(maths, student);
         secondLecturer.setGrade(8.0, student);
         firstLecturer.setGrade(7.0, student);
-//
-//        admin.addPayment(student);
+
+        admin.addPayment(student);
 //        admin.addPayment(student);
 //        admin.addPayment(student);
 //        admin.addPayment(student);
@@ -52,12 +52,13 @@ public class Driver {
 
 
 //        student.printFees();
+
 //
 //        admin.printListOfBranches();
 
         firstLecturer.createAssignment("10.05.2021", "Create a banking app");
 
-        student.printAssignments();
+//        student.printAssignments();
 
 
 //        student.printGrades();

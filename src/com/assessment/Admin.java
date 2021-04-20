@@ -53,11 +53,15 @@ public class Admin extends Person {
     }
 
     public Student createStudents(String first_name, String last_name, String gender, String phone, String dob,
-                                  String emailAddress, String username, String password, CollegeBranch collegeBranch, Course course, boolean isPaidFull) {
+                                  String emailAddress, String username, String password, CollegeBranch collegeBranch, Course course, boolean isPaidFull, int installments) {
 
         student = new Student(first_name, last_name, gender, phone, dob, emailAddress, username, password, collegeBranch, course, isPaidFull);
+        // add student to list of students in course
         module.getCourse().getListOfStudentsCourse().add(student);
+        // add student to list of students in the college branch
         collegeBranch.getListOfStudents().add(student);
+        // set the installments to be paid
+        setInstallments(installments, student);
         return student;
 
     }
@@ -147,7 +151,27 @@ public class Admin extends Person {
 
         }
         if (count == s.getFees().size()){
-            System.out.println("THE FEES ARE ALL PAID. NO NEED TO ADD PAYMENT!!!");
+            System.out.println("THE FEES ARE ALL PAID. NO NEED TO ADD EXTRA PAYMENT!!!");
+        }
+
+    }
+
+
+
+    // Set fees installments
+
+    private void setInstallments(int installments, Student s){
+
+        if(s.isPaidFull()){
+            for (int i = 0; i < installments; i++) {
+                s.getFees().add(0.0);
+            }
+        } else {
+            Double installment = s.getCourse().getPrice() / installments;
+
+            for (int i = 0; i < installments; i++) {
+                s.getFees().add(installment);
+            }
         }
 
     }
