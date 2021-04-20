@@ -51,9 +51,13 @@ public class Driver {
 //        admin.addPayment(student);
 
 
-        student.printFees();
+//        student.printFees();
+//
+//        admin.printListOfBranches();
 
-        admin.printListOfBranches();
+        firstLecturer.createAssignment("10.05.2021", "Create a banking app");
+
+        student.printAssignments();
 
 
 //        student.printGrades();
