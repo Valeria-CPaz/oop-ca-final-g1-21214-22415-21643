@@ -7,14 +7,14 @@ public class Driver {
         // first: create administrator
 
         Admin admin = new Admin("Marcus", "Moura", "male", "12345678", "20.06.1995", "marcus@moura.ie", "mafr",
-                "123456" );
+                "123456");
 
         // admin creates a College Branch
         CollegeBranch branchOne = admin.createBranch("I", "Dorset Street");
         CollegeBranch branchTwo = admin.createBranch("II", "Abbey Street");
 
         // admin creates a course
-        Course scienceInComputing= admin.createCourse(branchOne, "Science in Computing", 4500.00);
+        Course scienceInComputing = admin.createCourse(branchOne, "Science in Computing", 4500.00);
         Course business = admin.createCourse(branchTwo, "Business", 5000.00);
 
         // admin creates a module for the course
@@ -36,7 +36,7 @@ public class Driver {
 
         Student student = admin.createStudents("Valeria", "Paz", "female", "789456123",
                 "05.08.1989", "val@paz.ie", "valparaiso", "142536",
-                branchOne, scienceInComputing, false, 1);
+                branchOne, scienceInComputing, false, 6);
 
         admin.addStudentToModule(programming, student);
         admin.addStudentToModule(maths, student);
@@ -56,9 +56,11 @@ public class Driver {
 //
 //        admin.printListOfBranches();
 
-        firstLecturer.createAssignment("10.05.2021", "Create a banking app");
+        Assignment firstAssignment = firstLecturer.createAssignment("10.05.2021", "Create a banking app");
+        student.printAssignments();
 
-//        student.printAssignments();
+        firstLecturer.editAssignment(firstAssignment, "11.05.2022", "Create a college app");
+        student.printAssignments();
 
 
 //        student.printGrades();

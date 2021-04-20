@@ -1,6 +1,7 @@
 package com.assessment;
 
 public class Assignment {
+
     private String dueDate;
     private String description;
     private String lecturerName;
@@ -29,6 +30,14 @@ public class Assignment {
 
     public Module getModule() {
         return module;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 
