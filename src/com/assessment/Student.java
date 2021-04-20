@@ -101,7 +101,7 @@ public class Student extends Person{
 
     }
 
-    // PRINTING ASSIGNMENTS
+    // PRINTING and MANAGING ASSIGNMENTS
 
     public void printAssignments(){
 
@@ -115,4 +115,6 @@ public class Student extends Person{
         }
 
     }
+
+
 }

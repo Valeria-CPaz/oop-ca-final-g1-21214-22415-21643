@@ -73,6 +73,42 @@ public class Lecturer extends Person implements LecturerTools {
     @Override
     public void deleteAssignment(Assignment assignment) {
 
+        try{
+            getModule().getListOfAssignments().remove(assignment);
+            for (Student s : getModule().getListOfStudentsModule()){
+                s.getListOfAssignments().remove(assignment);
+            }
+        } catch (Exception e){
+            System.out.println("This assignment does not exist!");
+        }
+
+    }
+
+    @Override
+    public void editAssignment(Assignment assignment, String dueDate, String description) {
+
+
+
+        for (int i = 0; i< getModule().getListOfAssignments().size(); i++){
+            if (getModule().getListOfAssignments().get(i).equals(assignment)){
+
+                getModule().getListOfAssignments().get(i).setDescription(description);
+                getModule().getListOfAssignments().get(i).setDueDate(dueDate);
+                break;
+            }
+        }
+
+        for(Student s : getModule().getListOfStudentsModule()){
+            for (int i = 0; i< s.getListOfAssignments().size(); i++){
+                if(s.getListOfAssignments().get(i).equals(assignment)){
+
+                    s.getListOfAssignments().get(i).setDueDate(dueDate);
+                    s.getListOfAssignments().get(i).setDescription(description);
+
+                }
+            }
+        }
+
     }
 
     @Override
