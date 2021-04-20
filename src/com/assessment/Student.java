@@ -109,4 +109,19 @@ public class Student extends Person{
         }
 
     }
+
+    // PRINTING ASSIGNMENTS
+
+    public void printAssignments(){
+
+        System.out.println("ASSIGNMENT LIST AND DATES\n");
+
+        for (Assignment ass : getListOfAssignments()){
+            System.out.println("Subject: " + ass.getModule().getSubject());
+            System.out.println("Due date: " + ass.getDueDate());
+            System.out.println("Description: "+ ass.getDescription());
+            System.out.println("======================================");
+        }
+
+    }
 }

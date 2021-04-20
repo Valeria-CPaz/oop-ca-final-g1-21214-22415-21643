@@ -43,7 +43,7 @@ public class Lecturer extends Person implements LecturerTools {
         int count = 0;
 
         for (Module m : s.getTimetable()) {
-            System.out.println(m.getSubject());
+//            System.out.println(m.getSubject());
             if (m.equals(getModule())) {
                 if (grade <= 10.0 && grade >= 0.0) {
                     s.getGrades().put(getModule().getSubject(), grade);

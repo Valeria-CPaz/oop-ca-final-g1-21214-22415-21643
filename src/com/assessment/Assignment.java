@@ -14,5 +14,21 @@ public class Assignment {
         this.lecturerName = lecturerName;
         this.module = module;
     }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getLecturerName() {
+        return lecturerName;
+    }
+
+    public Module getModule() {
+        return module;
+    }
 }
 
