@@ -12,8 +12,8 @@ public class Admin extends Person {
     private ArrayList<CollegeBranch> listOfBranches = new ArrayList<>();
 
 
-    public Admin(String first_name, String last_name, String gender, String phone, String dob, String emailAddress, String id, String password) {
-        super(first_name, last_name, gender, phone, dob, emailAddress, id, password);
+    public Admin(String first_name, String last_name, String gender, String phone, String dob, String emailAddress, String username, String password) {
+        super(first_name, last_name, gender, phone, dob, emailAddress, username, password);
     }
 
     public Admin(String first_name, String last_name) {
@@ -36,84 +36,42 @@ public class Admin extends Person {
     }
 
     public Lecturer createLecturer(String first_name, String last_name, String gender, String phone, String dob, String emailAddress,
-                                   String id, String password, String courseName, String module, String collegeBranch) throws Exception {
+                                   String username, String password, Module module, CollegeBranch collegeBranch) throws Exception {
 
-        lecturer = new Lecturer(first_name, last_name, gender, phone, dob, emailAddress, id, password, module,courseName, collegeBranch);
-
-
-        // add lecturer to list of students in the college branch
-        for(CollegeBranch cb: getListOfBranches()){
-            if(cb.getUnit().equalsIgnoreCase(student.getCollegeBranchName())){
-                lecturer.setCollegeBranch(cb);
-                cb.getListOfLecturers().add(lecturer);
-                break;
-            } else {
-                throw new Exception("The branch you're trying to add to the lecturer does not exist!!!");
-            }
-        }
-
-        // Add lecturer to the course
-
-        for (Course c : lecturer.getCollegeBranch().getListOfCourses()){
-            if(c.getName().equalsIgnoreCase(lecturer.getCourseName())){
-                c.getListOfLecturersCourse().add(lecturer);
-                break;
-            }
-            else{
-                throw new Exception("The course You're trying to add the lecturer to does not exist!!!");
-            }
-        }
-
-        // add lecturer to the module
-
-        for(Module m: lecturer.getCourse().getListOfModulesCourse()){
-            if(m.getSubject().equalsIgnoreCase(lecturer.getModuleName())){
-                m.setLecture(lecturer);
-                break;
-            } else {
-                throw new Exception("The module you're trying to add the lecturer does not exist!!!");
-            }
-        }
-
+        lecturer = new Lecturer(first_name, last_name, gender, phone, dob, emailAddress, username, password, module, collegeBranch);
+        module.getCourse().getListOfLecturersCourse().add(lecturer);
+        collegeBranch.getListOfLecturers().add(lecturer);
 
         return lecturer;
     }
 
+    public Lecturer createLecturer(String first_name, String last_name, CollegeBranch collegeBranch) {
+
+        lecturer = new Lecturer(first_name, last_name, collegeBranch);
+
+        return lecturer;
+    }
 
     public Student createStudents(String first_name, String last_name, String gender, String phone, String dob,
-                                  String emailAddress, String id, String password, String collegeBranch, String course, boolean isPaidFull, int installments) throws Exception {
+                                  String emailAddress, String username, String password, CollegeBranch collegeBranch, Course course, boolean isPaidFull, int installments) {
 
-        student = new Student(first_name, last_name, gender, phone, dob, emailAddress, id, password, collegeBranch, course, isPaidFull);
-
-        // add student to list of students in the college branch
-        for(CollegeBranch cb: getListOfBranches()){
-            if(cb.getUnit().equalsIgnoreCase(student.getCollegeBranchName())){
-                student.setCollegeBranch(cb);
-                cb.getListOfStudents().add(student);
-                break;
-            } else {
-                throw new Exception("The branch you're trying to add to the student does not exist!!!");
-            }
-        }
-
+        student = new Student(first_name, last_name, gender, phone, dob, emailAddress, username, password, collegeBranch, course, isPaidFull);
         // add student to list of students in course
-
-        for(Course c : student.getCollegeBranch().getListOfCourses()){
-            if(c.getName().equalsIgnoreCase(student.getCourseName())){
-                student.setCourse(c);
-                c.getListOfStudentsCourse().add(student);
-                break;
-            } else{
-                throw new Exception("The course you're trying to add the student to does not exist!!!");
-            }
-        }
-
+        module.getCourse().getListOfStudentsCourse().add(student);
+        // add student to list of students in the college branch
+        collegeBranch.getListOfStudents().add(student);
         // set the installments to be paid
         setInstallments(installments, student);
         return student;
 
     }
 
+    public Student createStudents(String first_name, String last_name) {
+
+        student = new Student(first_name, last_name);
+        return student;
+
+    }
 
     // DELETING COURSES LECTURERS AND STUDENTS
 
@@ -270,5 +228,3 @@ public class Admin extends Person {
     }
 
 }
-
-

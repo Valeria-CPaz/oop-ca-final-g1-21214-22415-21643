@@ -5,32 +5,28 @@ import java.util.Map;
 
 public class Lecturer extends Person implements LecturerTools {
 
-    private Course course;
-    private String courseName;
     private Module module;
     private CollegeBranch collegeBranch;
-    private String moduleName;
-    private String collegeBranchName;
 
 
 
     public Lecturer(String first_name, String last_name, String gender, String phone, String dob, String emailAddress,
-                    String idLecturer, String password, String courseName, String moduleName, String collegeBranchName) throws Exception {
-        super(first_name, last_name, gender, phone, dob, emailAddress, idLecturer, password);
-        this.moduleName = moduleName;
-        this.collegeBranchName = collegeBranchName;
-        this.courseName = courseName;
-
+                    String username, String password, Module module, CollegeBranch collegeBranch) throws Exception {
+        super(first_name, last_name, gender, phone, dob, emailAddress, username, password);
+        if (!module.getCollegeBranch().equals(collegeBranch)) {
+            throw new Exception("The module and the Branch are not equal!!!!!");
+        } else {
+            this.module = module;
+            this.collegeBranch = collegeBranch;
+            module.setLecture(this);
+        }
     }
 
-
-    public Course getCourse() {
-        return course;
+    public Lecturer(String first_name, String last_name, CollegeBranch collegeBranch) {
+        super(first_name, last_name);
+        this.collegeBranch = collegeBranch;
     }
 
-    public String getCourseName() {
-        return courseName;
-    }
 
     public Module getModule() {
         return module;
@@ -38,38 +34,6 @@ public class Lecturer extends Person implements LecturerTools {
 
     public CollegeBranch getCollegeBranch() {
         return collegeBranch;
-    }
-
-    public String getModuleName() {
-        return moduleName;
-    }
-
-    public String getCollegeBranchName() {
-        return collegeBranchName;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public void setModule(Module module) {
-        this.module = module;
-    }
-
-    public void setCollegeBranch(CollegeBranch collegeBranch) {
-        this.collegeBranch = collegeBranch;
-    }
-
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
-    }
-
-    public void setCollegeBranchName(String collegeBranchName) {
-        this.collegeBranchName = collegeBranchName;
     }
 
     @Override
@@ -205,4 +169,3 @@ public class Lecturer extends Person implements LecturerTools {
     }
 
 }
-
