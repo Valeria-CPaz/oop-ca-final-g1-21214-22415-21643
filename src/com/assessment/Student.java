@@ -17,9 +17,10 @@ public class Student extends Person{
 
 
 
-    public Student(String first_name, String last_name, String gender, String phone, String dob,
+
+    public Student(String firstName, String lastName, String gender, String phone, String dob,
                    String emailAddress, String id, String password, CollegeBranch collegeBranch, Course course, boolean isPaidFull) {
-        super(first_name, last_name, gender, phone, dob, emailAddress, id, password);
+        super(firstName, lastName, gender, phone, dob, emailAddress, id, password);
         this.collegeBranch = collegeBranch;
         this.course = course;
         this.isPaidFull = isPaidFull;

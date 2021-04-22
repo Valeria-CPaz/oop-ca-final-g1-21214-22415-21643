@@ -11,8 +11,8 @@ public class Lecturer extends Person implements LecturerTools {
 
 
     public Lecturer(String first_name, String last_name, String gender, String phone, String dob, String emailAddress,
-                    String username, String password, Module module, CollegeBranch collegeBranch) throws Exception {
-        super(first_name, last_name, gender, phone, dob, emailAddress, username, password);
+                    String lecturerId, String password, Module module, CollegeBranch collegeBranch) throws Exception {
+        super(first_name, last_name, gender, phone, dob, emailAddress, lecturerId, password);
         if (!module.getCollegeBranch().equals(collegeBranch)) {
             throw new Exception("The module and the Branch are not equal!!!!!");
         } else {

@@ -12,8 +12,8 @@ public class Admin extends Person {
     private ArrayList<CollegeBranch> listOfBranches = new ArrayList<>();
 
 
-    public Admin(String first_name, String last_name, String gender, String phone, String dob, String emailAddress, String username, String password) {
-        super(first_name, last_name, gender, phone, dob, emailAddress, username, password);
+    public Admin(String first_name, String last_name, String gender, String phone, String dob, String emailAddress, String adminId, String password) {
+        super(first_name, last_name, gender, phone, dob, emailAddress, adminId, password);
     }
 
     public Admin(String first_name, String last_name) {
@@ -36,26 +36,20 @@ public class Admin extends Person {
     }
 
     public Lecturer createLecturer(String first_name, String last_name, String gender, String phone, String dob, String emailAddress,
-                                   String username, String password, Module module, CollegeBranch collegeBranch) throws Exception {
+                                   String lecturerId, String password, Module module, CollegeBranch collegeBranch) throws Exception {
 
-        lecturer = new Lecturer(first_name, last_name, gender, phone, dob, emailAddress, username, password, module, collegeBranch);
+        lecturer = new Lecturer(first_name, last_name, gender, phone, dob, emailAddress, lecturerId, password, module, collegeBranch);
         module.getCourse().getListOfLecturersCourse().add(lecturer);
         collegeBranch.getListOfLecturers().add(lecturer);
 
         return lecturer;
     }
 
-    public Lecturer createLecturer(String first_name, String last_name, CollegeBranch collegeBranch) {
-
-        lecturer = new Lecturer(first_name, last_name, collegeBranch);
-
-        return lecturer;
-    }
 
     public Student createStudents(String first_name, String last_name, String gender, String phone, String dob,
-                                  String emailAddress, String username, String password, CollegeBranch collegeBranch, Course course, boolean isPaidFull, int installments) {
+                                  String emailAddress, String studentId, String password, CollegeBranch collegeBranch, Course course, boolean isPaidFull, int installments) {
 
-        student = new Student(first_name, last_name, gender, phone, dob, emailAddress, username, password, collegeBranch, course, isPaidFull);
+        student = new Student(first_name, last_name, gender, phone, dob, emailAddress, studentId, password, collegeBranch, course, isPaidFull);
         // add student to list of students in course
         module.getCourse().getListOfStudentsCourse().add(student);
         // add student to list of students in the college branch
@@ -66,12 +60,6 @@ public class Admin extends Person {
 
     }
 
-    public Student createStudents(String first_name, String last_name) {
-
-        student = new Student(first_name, last_name);
-        return student;
-
-    }
 
     // DELETING COURSES LECTURERS AND STUDENTS
 
