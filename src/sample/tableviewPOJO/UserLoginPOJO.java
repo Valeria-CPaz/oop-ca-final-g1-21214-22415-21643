@@ -37,7 +37,6 @@ public class UserLoginPOJO {
         UserLoginPOJO.userFullName.set(userFullName);
     }
 
-
     public static int getStudentYear() {
         return studentYear.get();
     }

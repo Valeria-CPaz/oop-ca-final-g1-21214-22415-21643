@@ -34,14 +34,10 @@ public class AdminMainPage implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
     private Admin admin;
-
 
     @FXML
     private ChoiceBox<String> studentsInDebt;
-
-
     @FXML
     private TextField branchUnitInsert, createLecturerId, lecturerFirstName, lecturerLastName, lecturerPhone, lecturerEmail, lecturerpassword;
     @FXML
