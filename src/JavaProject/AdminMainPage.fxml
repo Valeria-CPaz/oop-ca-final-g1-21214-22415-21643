@@ -119,8 +119,8 @@
                                 <Button fx:id="clearBranchBtn" layoutX="332.0" layoutY="499.0" mnemonicParsing="false" onAction="#toClearInputs" prefHeight="25.0" prefWidth="60.0" text="Clear" />
                         <TableView fx:id="collegeBranchTableView" layoutX="449.0" layoutY="8.0" onMouseClicked="#getSelectedBranch" prefHeight="516.0" prefWidth="526.0">
                           <columns>
-                            <TableColumn fx:id="col_createbranchUnit" prefWidth="75.0" text="Unit" />
-                            <TableColumn fx:id="col_createbranchAddress" prefWidth="299.0" text="Address" />
+                            <TableColumn fx:id="col_createbranchUnit" prefWidth="179.0" text="Unit" />
+                            <TableColumn fx:id="col_createbranchAddress" prefWidth="346.0" text="Address" />
                           </columns>
                         </TableView>
                             </children>
@@ -143,9 +143,9 @@
                         <ChoiceBox fx:id="createCourseBranchChoice" layoutX="150.0" layoutY="35.0" onDragDetected="#toCreateCourse" prefHeight="25.0" prefWidth="150.0" />
                         <TableView fx:id="courseTableVIew" layoutX="449.0" layoutY="8.0" onMouseClicked="#getSelectedCourse" prefHeight="516.0" prefWidth="526.0">
                           <columns>
-                            <TableColumn fx:id="col_createCourseName" prefWidth="202.0" text="Course" />
-                            <TableColumn fx:id="col_createCourseBranch" prefWidth="71.0" text="Branch" />
-                              <TableColumn fx:id="col_createCoursePrice" prefWidth="100.0" text="Price" />
+                            <TableColumn fx:id="col_createCourseName" prefWidth="241.0" text="Course" />
+                            <TableColumn fx:id="col_createCourseBranch" prefWidth="123.0" text="Branch" />
+                              <TableColumn fx:id="col_createCoursePrice" prefWidth="161.0" text="Price" />
                           </columns>
                         </TableView>
                             </children>
@@ -178,7 +178,7 @@
                             <TableColumn fx:id="col_createModuleCourse" prefWidth="113.0" text="Couse" />
                               <TableColumn fx:id="col_createModuleLecturerid" prefWidth="102.0" text="LecturerID" />
                               <TableColumn fx:id="col_createModuleWeekday" prefWidth="104.0" text="WeekDay" />
-                              <TableColumn fx:id="col_createModuleHour" prefWidth="64.0" text="Hour" />
+                              <TableColumn fx:id="col_createModuleHour" prefWidth="81.0" text="Hour" />
                           </columns>
                         </TableView>
                             </children>
@@ -203,7 +203,7 @@
                           <columns>
                             <TableColumn fx:id="col_createCourseYearCourse" prefWidth="205.0" text="Course" />
                               <TableColumn fx:id="col_createCourseYearYear" prefWidth="74.0" text="Year" />
-                              <TableColumn fx:id="col_createCourseYearModule" prefWidth="193.0" text="Module" />
+                              <TableColumn fx:id="col_createCourseYearModule" prefWidth="246.0" text="Module" />
                           </columns>
                         </TableView>
                      </children>
@@ -214,7 +214,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="666.0" prefWidth="1000.0">
                      <children>
-                        <Label layoutX="371.0" layoutY="75.0" text="Seach by student ID:" textFill="WHITE" />
+                        <Label layoutX="379.0" layoutY="54.0" text="Seach by student ID:" textFill="WHITE" />
                         <TableView fx:id="tableViewPayments" layoutX="252.0" layoutY="143.0" onMouseClicked="#getSelectedPaymentLog" prefHeight="209.0" prefWidth="497.0">
                           <columns>
                             <TableColumn fx:id="col_paymentsID" prefWidth="102.0" text="Payment ID" />
@@ -224,8 +224,9 @@
                           </columns>
                         </TableView>
                         <Button fx:id="btnAddPayment" layoutX="451.0" layoutY="404.0" mnemonicParsing="false" onAction="#addPayments" text="ADD PAYMENT" />
-                        <Label fx:id="numberInstallmentsToAdd" layoutX="518.0" layoutY="83.0" text=" " textFill="WHITE" />
-                        <ChoiceBox fx:id="studentsInDebt" layoutX="514.0" layoutY="71.0" prefHeight="25.0" prefWidth="100.0" />
+                        <Label fx:id="numberInstallmentsToAdd" layoutX="346.0" layoutY="99.0" textFill="WHITE" />
+                        <ChoiceBox fx:id="studentsInDebt" layoutX="522.0" layoutY="50.0" prefHeight="25.0" prefWidth="100.0" />
+                        <Label fx:id="labelAmountOfInstallments" layoutX="346.0" layoutY="99.0" textFill="WHITE" />
                      </children>
                   </AnchorPane>
               </content>

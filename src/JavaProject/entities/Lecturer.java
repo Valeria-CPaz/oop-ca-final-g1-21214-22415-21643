@@ -8,16 +8,6 @@ import java.sql.SQLException;
 
 public class Lecturer extends Person{
 
-//    private UsefulVariables usefulVariables = new UsefulVariables();
-    private static Connection con;
-
-    static {
-        try {
-            con = DriverManager.getConnection(UsefulVariables.URL, UsefulVariables.DB_USER, UsefulVariables.DB_PASSWORD);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
 
     public static Lecturer lecturer;
 
@@ -36,7 +26,7 @@ public class Lecturer extends Person{
 
         String sql = "INSERT INTO gradesModule (studentid, modulename, grade, lecturerid) VALUES (?,?,?,?)";
 
-        UsefulVariables.addGrade = con.prepareStatement(sql);
+        UsefulVariables.addGrade = UsefulVariables.con.prepareStatement(sql);
 
         UsefulVariables.addGrade.setString(1, studentid);
         UsefulVariables.addGrade.setString(2, modulename);
@@ -55,7 +45,7 @@ public class Lecturer extends Person{
 
         String sql = "UPDATE gradesModule SET grade = ?, modulename = ? WHERE gradeid = ?";
 
-        UsefulVariables.editAssignment = con.prepareStatement(sql);
+        UsefulVariables.editAssignment = UsefulVariables.con.prepareStatement(sql);
 
         UsefulVariables.editAssignment.setDouble(1, grade);
         UsefulVariables.editAssignment.setString(2, module);
@@ -75,7 +65,7 @@ public class Lecturer extends Person{
 
         String sql = "INSERT INTO assignment (dueDate, description, lecturerId, moduleSubject) VALUES (?,?,?,?)";
 
-        UsefulVariables.createAssignmentQuery = con.prepareStatement(sql);
+        UsefulVariables.createAssignmentQuery = UsefulVariables.con.prepareStatement(sql);
 
         UsefulVariables.createAssignmentQuery.setString(1, dueDate);
         UsefulVariables.createAssignmentQuery.setString(2, description);
@@ -94,7 +84,7 @@ public class Lecturer extends Person{
 
         String sql = "DELETE from assignment WHERE idassignment = '" + id + "'";
 
-        UsefulVariables.deleteAssignment = con.prepareStatement(sql);
+        UsefulVariables.deleteAssignment = UsefulVariables.con.prepareStatement(sql);
 
 
         UsefulVariables.deleteAssignment.execute();
@@ -109,7 +99,7 @@ public class Lecturer extends Person{
 
         String sql = "UPDATE assignment SET dueDate = ?, description = ?, moduleSubject = ? WHERE idassignment = ?";
 
-        UsefulVariables.editAssignment = con.prepareStatement(sql);
+        UsefulVariables.editAssignment = UsefulVariables.con.prepareStatement(sql);
 
         UsefulVariables.editAssignment.setString(1, dueDate);
         UsefulVariables.editAssignment.setString(2, description);
@@ -130,7 +120,7 @@ public class Lecturer extends Person{
 
         String sql = "INSERT INTO exam (date, lecturerId, module) VALUES (?,?,?)";
 
-        UsefulVariables.createExam = con.prepareStatement(sql);
+        UsefulVariables.createExam = UsefulVariables.con.prepareStatement(sql);
 
         UsefulVariables.createExam.setString(1, date);
         UsefulVariables.createExam.setString(2, lecturerid);
@@ -149,7 +139,7 @@ public class Lecturer extends Person{
 
         String sql = "UPDATE exam SET date = ?, module = ? WHERE idexam = ?";
 
-        UsefulVariables.editExam = con.prepareStatement(sql);
+        UsefulVariables.editExam = UsefulVariables.con.prepareStatement(sql);
 
         UsefulVariables.editExam.setString(1, date);
         UsefulVariables.editExam.setString(2, module);
@@ -165,7 +155,7 @@ public class Lecturer extends Person{
 
         String sql = "DELETE from exam WHERE idexam = '" + id + "'";
 
-        UsefulVariables.deleteExam = con.prepareStatement(sql);
+        UsefulVariables.deleteExam = UsefulVariables.con.prepareStatement(sql);
 
 
         UsefulVariables.deleteExam.execute();

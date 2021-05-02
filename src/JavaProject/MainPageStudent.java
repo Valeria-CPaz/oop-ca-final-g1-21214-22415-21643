@@ -26,8 +26,6 @@ import java.util.ResourceBundle;
 public class MainPageStudent implements Initializable {
 
 
-    private Connection con = DriverManager.getConnection(UsefulVariables.URL, UsefulVariables.DB_USER, UsefulVariables.DB_PASSWORD);
-
     @FXML
     private Label welcomeMessage1;
 
@@ -183,7 +181,7 @@ public class MainPageStudent implements Initializable {
 
 
         String sql1 = "select * from courseYear WHERE year = ?";
-        UsefulVariables.getModules = con.prepareStatement(sql1);
+        UsefulVariables.getModules = UsefulVariables.con.prepareStatement(sql1);
         UsefulVariables.getModules.setInt(1, studentYear);
         ResultSet resultModulesinYear = UsefulVariables.getModules.executeQuery();
 
@@ -211,7 +209,7 @@ public class MainPageStudent implements Initializable {
 
         String sql = "Select * from assignment WHERE moduleSubject = ?";
 
-        UsefulVariables.getAllAssignments = con.prepareStatement(sql);
+        UsefulVariables.getAllAssignments = UsefulVariables.con.prepareStatement(sql);
         UsefulVariables.getAllAssignments.setString(1, moduleSubject);
         ResultSet result = UsefulVariables.getAllAssignments.executeQuery();
 
@@ -254,7 +252,7 @@ public class MainPageStudent implements Initializable {
 
 
         String sql = "select * from assignment WHERE idassignment = ?";
-        UsefulVariables.getSelectedAssignment = con.prepareStatement(sql);
+        UsefulVariables.getSelectedAssignment = UsefulVariables.con.prepareStatement(sql);
         UsefulVariables.getSelectedAssignment.setInt(1, assignmentId);
         ResultSet resultAllAssignments = UsefulVariables.getSelectedAssignment.executeQuery();
 
@@ -300,7 +298,7 @@ public class MainPageStudent implements Initializable {
 
         String sql = "Select * from gradesModule WHERE studentid = ? AND modulename = ?";
 
-        UsefulVariables.getAllGrades = con.prepareStatement(sql);
+        UsefulVariables.getAllGrades = UsefulVariables.con.prepareStatement(sql);
         UsefulVariables.getAllGrades.setString(1, studentId);
         UsefulVariables.getAllGrades.setString(2, moduleSubject);
         ResultSet result = UsefulVariables.getAllGrades.executeQuery();
@@ -343,7 +341,7 @@ public class MainPageStudent implements Initializable {
 
 
         String sql = "select * from gradesModule WHERE gradeid = ?";
-        UsefulVariables.getSelectedGrade = con.prepareStatement(sql);
+        UsefulVariables.getSelectedGrade = UsefulVariables.con.prepareStatement(sql);
         UsefulVariables.getSelectedGrade.setInt(1, gradesId);
         ResultSet resultGetSelectedGrade = UsefulVariables.getSelectedGrade.executeQuery();
 
@@ -386,7 +384,7 @@ public class MainPageStudent implements Initializable {
 
         String sql = "Select * from exam WHERE module = ?";
 
-        UsefulVariables.getSelectedExam = con.prepareStatement(sql);
+        UsefulVariables.getSelectedExam = UsefulVariables.con.prepareStatement(sql);
         UsefulVariables.getSelectedExam.setString(1, module);
         ResultSet result = UsefulVariables.getSelectedExam.executeQuery();
 
@@ -425,7 +423,7 @@ public class MainPageStudent implements Initializable {
 
 
         String sql = "select * from exam WHERE idexam = ?";
-        UsefulVariables.getSelectedExam = con.prepareStatement(sql);
+        UsefulVariables.getSelectedExam = UsefulVariables.con.prepareStatement(sql);
         UsefulVariables.getSelectedExam.setInt(1, examsId);
         ResultSet resultGetExam = UsefulVariables.getSelectedExam.executeQuery();
 
@@ -466,7 +464,7 @@ public class MainPageStudent implements Initializable {
 
         String sql1 = "Select moduleName from courseYear WHERE year = ?";
 
-        PreparedStatement statementOne = con.prepareStatement(sql1);
+        PreparedStatement statementOne = UsefulVariables.con.prepareStatement(sql1);
 
         statementOne.setInt(1, studentYear);
         ResultSet resultOne = statementOne.executeQuery();
@@ -478,7 +476,7 @@ public class MainPageStudent implements Initializable {
             TimetablePOJO timetablePOJO = new TimetablePOJO();
 
             String sql2 = "SELECT * FROM module WHERE subject = ?";
-            statementTwo = con.prepareStatement(sql2);
+            statementTwo = UsefulVariables.con.prepareStatement(sql2);
             statementTwo.setString(1, resultOne.getString("moduleName"));
             ResultSet resultTwo = statementTwo.executeQuery();
 

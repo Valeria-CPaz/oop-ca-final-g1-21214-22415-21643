@@ -34,7 +34,7 @@
                                  <TableColumn fx:id="col_assignmentId" prefWidth="45.0" text="ID" />
                                  <TableColumn fx:id="col_assignmentModule" prefWidth="137.0" text="MODULE" />
                                  <TableColumn fx:id="col_assignmentDate" prefWidth="95.0" text="DATE" />
-                                 <TableColumn fx:id="col_assignmentDescription" prefWidth="199.0" text="DESCRIPTION" />
+                                 <TableColumn fx:id="col_assignmentDescription" prefWidth="248.0" text="DESCRIPTION" />
                              </columns>
                          </TableView>
                      </children>
@@ -53,8 +53,8 @@
                              <columns>
                                  <TableColumn fx:id="col_gradesId" prefWidth="73.0" text="ID" />
                                  <TableColumn fx:id="col_gradesStudentId" prefWidth="163.0" text="StudentID" />
-                                 <TableColumn fx:id="col_gradesModule" prefWidth="144.0" text="Module" />
-                                 <TableColumn fx:id="col_gradesGrades" prefWidth="81.0" text="Grade" />
+                                 <TableColumn fx:id="col_gradesModule" prefWidth="188.0" text="Module" />
+                                 <TableColumn fx:id="col_gradesGrades" prefWidth="101.0" text="Grade" />
                              </columns>
                          </TableView>
                         <Label fx:id="welcomeMessage2" layoutX="62.0" layoutY="39.0" text="Label" />
@@ -72,8 +72,8 @@
                          <TableView fx:id="tableViewExams" layoutX="449.0" layoutY="8.0" onMouseClicked="#getSelectedExam" prefHeight="499.0" prefWidth="526.0">
                              <columns>
                                  <TableColumn fx:id="col_examsId" prefWidth="44.0" text="ID" />
-                                 <TableColumn fx:id="col_examsModule" prefWidth="201.0" text="Module" />
-                                 <TableColumn fx:id="col_examsDate" prefWidth="136.0" text="Date" />
+                                 <TableColumn fx:id="col_examsModule" prefWidth="347.0" text="Module" />
+                                 <TableColumn fx:id="col_examsDate" prefWidth="134.0" text="Date" />
                              </columns>
                          </TableView>
                         <Label fx:id="welcomeMessage3" layoutX="62.0" layoutY="39.0" text="Label" />

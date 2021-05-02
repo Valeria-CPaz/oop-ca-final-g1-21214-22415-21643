@@ -24,27 +24,12 @@ import java.util.ResourceBundle;
 public class MainPageLecturer implements Initializable {
 
 
-    private UsefulVariables usefulVariables = new UsefulVariables();
-    private Connection con = DriverManager.getConnection(usefulVariables.URL, usefulVariables.DB_USER, usefulVariables.DB_PASSWORD);
-
 
     @FXML
     private DatePicker setAssignmentGetDate;
 
     @FXML
     private TextArea setAssignmentGetDescription;
-
-    @FXML
-    private Button saveAssignment;
-
-    @FXML
-    private Button updateAssignment;
-
-    @FXML
-    private Button deleteAssignment;
-
-    @FXML
-    private Button clearAssignmentContent;
 
     @FXML
     private ChoiceBox<String> setAssignmentGetModule;
@@ -77,15 +62,6 @@ public class MainPageLecturer implements Initializable {
     private TextField gradesGetGrade;
 
     @FXML
-    private Button btnSaveGrade;
-
-    @FXML
-    private Button btnEditGrade;
-
-    @FXML
-    private Button clearGrades;
-
-    @FXML
     private Label labelWelcome2;
 
     @FXML
@@ -108,18 +84,6 @@ public class MainPageLecturer implements Initializable {
 
     @FXML
     private DatePicker examsDate;
-
-    @FXML
-    private Button examsSave;
-
-    @FXML
-    private Button examsUpdate;
-
-    @FXML
-    private Button examsDelete;
-
-    @FXML
-    private Button examsClear;
 
     @FXML
     private Label labelWelcome3;
@@ -154,14 +118,23 @@ public class MainPageLecturer implements Initializable {
         setWelcomeMessage(UserLoginPOJO.getUserFullName());
 
         try {
-            setAssignmentGetModule.getItems().addAll(getModules());
             gradesGetModule.getItems().addAll(getModules());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        try {
+            setAssignmentGetModule.getItems().addAll(getModules());
             examsModule.getItems().addAll(getModules());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+
 
 
         refreshAssignmentList();
@@ -201,9 +174,9 @@ public class MainPageLecturer implements Initializable {
 
 
         String sql = "select * from module WHERE idlecturer = ?";
-        usefulVariables.getModules = con.prepareStatement(sql);
-        usefulVariables.getModules.setString(1, UserLoginPOJO.getUserID());
-        ResultSet resultBranches = usefulVariables.getModules.executeQuery();
+        UsefulVariables.getModules = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getModules.setString(1, UserLoginPOJO.getUserID());
+        ResultSet resultBranches = UsefulVariables.getModules.executeQuery();
 
         ArrayList<String> allModules = new ArrayList<>();
 
@@ -233,7 +206,8 @@ public class MainPageLecturer implements Initializable {
 
         refreshAssignmentList();
 
-        toClear();
+       toClear();
+
     }
 
     private ObservableList<AssigmentMaster> getAssignmentList() throws ClassNotFoundException, SQLException {
@@ -246,7 +220,7 @@ public class MainPageLecturer implements Initializable {
 
         String sql = "Select * from assignment WHERE lecturerId = ?";
 
-        UsefulVariables.getAllAssignments = con.prepareStatement(sql);
+        UsefulVariables.getAllAssignments = UsefulVariables.con.prepareStatement(sql);
         UsefulVariables.getAllAssignments.setString(1, UserLoginPOJO.getUserID());
         ResultSet result = UsefulVariables.getAllAssignments.executeQuery();
 
@@ -289,9 +263,9 @@ public class MainPageLecturer implements Initializable {
 
 
         String sql = "select * from assignment WHERE idassignment = ?";
-        usefulVariables.getSelectedAssignment = con.prepareStatement(sql);
-        usefulVariables.getSelectedAssignment.setInt(1, assignmentId);
-        ResultSet resultAllAssignments = usefulVariables.getSelectedAssignment.executeQuery();
+        UsefulVariables.getSelectedAssignment = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getSelectedAssignment.setInt(1, assignmentId);
+        ResultSet resultAllAssignments = UsefulVariables.getSelectedAssignment.executeQuery();
 
 
         while (resultAllAssignments.next()) {
@@ -352,6 +326,7 @@ public class MainPageLecturer implements Initializable {
         toClear();
 
 
+
     }
 
     @FXML
@@ -375,6 +350,7 @@ public class MainPageLecturer implements Initializable {
         refreshAssignmentList();
 
         refreshAssignmentList();
+
 
         toClear();
 
@@ -402,6 +378,8 @@ public class MainPageLecturer implements Initializable {
         refreshGradeList();
 
         toClear();
+
+
     }
 
 
@@ -415,7 +393,7 @@ public class MainPageLecturer implements Initializable {
 
         String sql = "Select * from gradesModule WHERE lecturerid = ?";
 
-        UsefulVariables.getAllGrades = con.prepareStatement(sql);
+        UsefulVariables.getAllGrades = UsefulVariables.con.prepareStatement(sql);
         UsefulVariables.getAllGrades.setString(1, UserLoginPOJO.getUserID());
         ResultSet result = UsefulVariables.getAllGrades.executeQuery();
 
@@ -457,9 +435,9 @@ public class MainPageLecturer implements Initializable {
 
 
         String sql = "select * from gradesModule WHERE gradeid = ?";
-        usefulVariables.getSelectedGrade = con.prepareStatement(sql);
-        usefulVariables.getSelectedGrade.setInt(1, gradesId);
-        ResultSet resultGetSelectedGrade = usefulVariables.getSelectedGrade.executeQuery();
+        UsefulVariables.getSelectedGrade = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getSelectedGrade.setInt(1, gradesId);
+        ResultSet resultGetSelectedGrade = UsefulVariables.getSelectedGrade.executeQuery();
 
 
         while (resultGetSelectedGrade.next()) {
@@ -526,6 +504,7 @@ public class MainPageLecturer implements Initializable {
         refreshGradeList();
 
 
+
         toClear();
 
 
@@ -578,6 +557,8 @@ public class MainPageLecturer implements Initializable {
 
         refreshExamsList();
 
+        toClear();
+
     }
 
     @FXML
@@ -602,6 +583,8 @@ public class MainPageLecturer implements Initializable {
 
         refreshExamsList();
 
+        toClear();
+
 
 
     }
@@ -617,7 +600,7 @@ public class MainPageLecturer implements Initializable {
 
         String sql = "Select * from exam WHERE lecturerId = ?";
 
-        UsefulVariables.getSelectedExam = con.prepareStatement(sql);
+        UsefulVariables.getSelectedExam = UsefulVariables.con.prepareStatement(sql);
         UsefulVariables.getSelectedExam.setString(1, UserLoginPOJO.getUserID());
         ResultSet result = UsefulVariables.getSelectedExam.executeQuery();
 
@@ -657,9 +640,9 @@ public class MainPageLecturer implements Initializable {
 
 
         String sql = "select * from exam WHERE idexam = ?";
-        usefulVariables.getSelectedExam = con.prepareStatement(sql);
-        usefulVariables.getSelectedExam.setInt(1, examsId);
-        ResultSet resultGetExam = usefulVariables.getSelectedExam.executeQuery();
+        UsefulVariables.getSelectedExam = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getSelectedExam.setInt(1, examsId);
+        ResultSet resultGetExam = UsefulVariables.getSelectedExam.executeQuery();
 
 
         while (resultGetExam.next()) {
@@ -721,7 +704,7 @@ public class MainPageLecturer implements Initializable {
         Class.forName("com.mysql.jdbc.Driver");
 
         String sql1 = "select * from courseYear WHERE moduleName = ?";
-        PreparedStatement getcourseYearList = con.prepareStatement(sql1);
+        PreparedStatement getcourseYearList = UsefulVariables.con.prepareStatement(sql1);
         getcourseYearList.setString(1, moduleName);
         ResultSet firstResult = getcourseYearList.executeQuery();
 
@@ -740,7 +723,7 @@ public class MainPageLecturer implements Initializable {
         ArrayList<String> allStudents = new ArrayList<>();
 
         String sql2 = "SELECT idstudent FROM student WHERE course = ? AND courseYear = ?";
-        PreparedStatement getListStudents = con.prepareStatement(sql2);
+        PreparedStatement getListStudents = UsefulVariables.con.prepareStatement(sql2);
         getListStudents.setString(1, course);
         getListStudents.setInt(2, year);
         ResultSet secondResult = getListStudents.executeQuery();

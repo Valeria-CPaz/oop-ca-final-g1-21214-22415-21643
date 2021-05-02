@@ -25,18 +25,12 @@ import java.util.*;
 
 public class AdminMainPage implements Initializable {
 
-    private UsefulVariables usefulVariables = new UsefulVariables();
 
-    private Connection con = DriverManager.getConnection(usefulVariables.URL, usefulVariables.DB_USER,
-            usefulVariables.DB_PASSWORD);
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     private Admin admin;
 
     @FXML
     private ChoiceBox<String> studentsInDebt;
+
     @FXML
     private TextField branchUnitInsert, createLecturerId, lecturerFirstName, lecturerLastName, lecturerPhone, lecturerEmail, lecturerpassword;
     @FXML
@@ -61,6 +55,9 @@ public class AdminMainPage implements Initializable {
     private DatePicker lecturerbirth, studentdobInsert;
 
     @FXML
+    private Label labelAmountOfInstallments;
+
+    @FXML
     private ChoiceBox<String> createModuleAddWeekDay;
     private String[] weekdays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 
@@ -68,10 +65,6 @@ public class AdminMainPage implements Initializable {
     private ChoiceBox<String> studentIsPaid;
 
 
-    @FXML
-    private ListView listViewStudent, listViewLecturer, listViewBranches, listViewCourses, listViewModules, listViewCourseYear;
-
-    private ArrayList<String> listCourses, listModules, listCourseYear;
 
 
     public AdminMainPage() throws SQLException, ClassNotFoundException {
@@ -213,7 +206,28 @@ public class AdminMainPage implements Initializable {
         refreshCourse();
         refreshModule();
         refreshCourseYear();
-        refreshPaymentLog();
+
+
+
+        studentsInDebt.setOnAction(actionEvent -> {
+
+            String studentId = studentsInDebt.getValue();
+            int installments = 0;
+            try {
+                installments = getAmountOfPayments(studentId);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            labelAmountOfInstallments.setText(String.format("The student has to pay %d installments in total", installments));
+            refreshPaymentLog(studentId);
+
+        });
+
+
+
 
 
     }
@@ -472,14 +486,27 @@ public class AdminMainPage implements Initializable {
         Class.forName("com.mysql.jdbc.Driver");
 
         String sql = "INSERT INTO collegeBranches(unit, address) VALUES (?, ?)";
-        usefulVariables.createBranchQuery = con.prepareStatement(sql);
+        UsefulVariables.createBranchQuery = UsefulVariables.con.prepareStatement(sql);
 
-        usefulVariables.createBranchQuery.setString(1, branchUnitInsert.getText());
-        usefulVariables.createBranchQuery.setString(2, branchAddressInsert.getText());
+        UsefulVariables.createBranchQuery.setString(1, branchUnitInsert.getText());
+        UsefulVariables.createBranchQuery.setString(2, branchAddressInsert.getText());
 
-        usefulVariables.createBranchQuery.execute();
+        UsefulVariables.createBranchQuery.execute();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("");
+        alert.setHeaderText("Branch created");
+        alert.show();
 
         refreshCollegeBranch();
+
+        studentInBranch.getItems().add(branchUnitInsert.getText());
+        createModuleAddBranch.getItems().add(branchUnitInsert.getText());
+        courseYearBranchInput.getItems().add(branchUnitInsert.getText());
+        createCourseBranchChoice.getItems().add(branchUnitInsert.getText());
+
+        branchUnitInsert.clear();
+        branchAddressInsert.clear();
 
     }
 
@@ -495,8 +522,16 @@ public class AdminMainPage implements Initializable {
         alert.setHeaderText("Branch deleted");
         alert.show();
 
+        studentInBranch.getItems().remove(branchUnitInsert.getText());
+        createModuleAddBranch.getItems().remove(branchUnitInsert.getText());
+        courseYearBranchInput.getItems().remove(branchUnitInsert.getText());
+        createCourseBranchChoice.getItems().remove(branchUnitInsert.getText());
+
         branchUnitInsert.clear();
         branchAddressInsert.clear();
+
+        refreshCollegeBranch();
+        refreshCourse();
 
     }
 
@@ -506,9 +541,9 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from student WHERE isPaidFull=?";
-        usefulVariables.addPaymentQuery = con.prepareStatement(sql);
-        usefulVariables.addPaymentQuery.setBoolean(1, false);
-        ResultSet resultStudentsInDebt = usefulVariables.addPaymentQuery.executeQuery();
+        UsefulVariables.addPaymentQuery = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.addPaymentQuery.setBoolean(1, false);
+        ResultSet resultStudentsInDebt = UsefulVariables.addPaymentQuery.executeQuery();
 
         ArrayList<String> studentsToPay = new ArrayList<>();
 
@@ -528,8 +563,8 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from collegeBranches";
-        usefulVariables.getBranches = con.prepareStatement(sql);
-        ResultSet resultBranches = usefulVariables.getBranches.executeQuery();
+        UsefulVariables.getBranches = UsefulVariables.con.prepareStatement(sql);
+        ResultSet resultBranches = UsefulVariables.getBranches.executeQuery();
 
         ArrayList<String> branchOptions = new ArrayList<>();
 
@@ -547,9 +582,9 @@ public class AdminMainPage implements Initializable {
         Class.forName("com.mysql.jdbc.Driver");
 
         String sql = "select * from course WHERE collegeBranchUnit = ?";
-        usefulVariables.getCourses = con.prepareStatement(sql);
-        usefulVariables.getCourses.setString(1, branchUnit);
-        ResultSet resultBranches = usefulVariables.getCourses.executeQuery();
+        UsefulVariables.getCourses = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getCourses.setString(1, branchUnit);
+        ResultSet resultBranches = UsefulVariables.getCourses.executeQuery();
 
         ArrayList<String> allCourses = new ArrayList<>();
 
@@ -570,8 +605,8 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from lecturer";
-        usefulVariables.getLecturersId = con.prepareStatement(sql);
-        ResultSet resultBranches = usefulVariables.getLecturersId.executeQuery();
+        UsefulVariables.getLecturersId = UsefulVariables.con.prepareStatement(sql);
+        ResultSet resultBranches = UsefulVariables.getLecturersId.executeQuery();
 
         ArrayList<String> allLecturers = new ArrayList<>();
 
@@ -589,9 +624,9 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from module WHERE course = ?";
-        usefulVariables.getModules = con.prepareStatement(sql);
-        usefulVariables.getModules.setString(1, courseName);
-        ResultSet resultBranches = usefulVariables.getModules.executeQuery();
+        UsefulVariables.getModules = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getModules.setString(1, courseName);
+        ResultSet resultBranches = UsefulVariables.getModules.executeQuery();
 
         ArrayList<String> allModules = new ArrayList<>();
 
@@ -609,9 +644,9 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from courseYear WHERE course = ?";
-        usefulVariables.getModules = con.prepareStatement(sql);
-        usefulVariables.getModules.setString(1, courseName);
-        ResultSet resultBranches = usefulVariables.getModules.executeQuery();
+        UsefulVariables.getModules = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getModules.setString(1, courseName);
+        ResultSet resultBranches = UsefulVariables.getModules.executeQuery();
 
         ArrayList<String> allYears = new ArrayList<>();
 
@@ -707,14 +742,14 @@ public class AdminMainPage implements Initializable {
 
 
         Class.forName("com.mysql.jdbc.Driver");
-        PreparedStatement getStudents;
+
 
         String sql = "Select * from student";
 
-        getStudents = con.prepareStatement(sql);
+        UsefulVariables.getStudents = UsefulVariables.con.prepareStatement(sql);
 
 
-        ResultSet result = getStudents.executeQuery();
+        ResultSet result = UsefulVariables.getStudents.executeQuery();
 
         while (result.next()) {
 
@@ -754,9 +789,9 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from student WHERE idstudent = ?";
-        usefulVariables.getAllStudents = con.prepareStatement(sql);
-        usefulVariables.getAllStudents.setString(1, idstudent);
-        ResultSet resultAllStudents = usefulVariables.getAllStudents.executeQuery();
+        UsefulVariables.getAllStudents = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getAllStudents.setString(1, idstudent);
+        ResultSet resultAllStudents = UsefulVariables.getAllStudents.executeQuery();
 
 
         while (resultAllStudents.next()) {
@@ -897,14 +932,14 @@ public class AdminMainPage implements Initializable {
 
 
         Class.forName("com.mysql.jdbc.Driver");
-        PreparedStatement getStudents;
+
 
         String sql = "Select * from lecturer";
 
-        usefulVariables.getAllLecturers = con.prepareStatement(sql);
+        UsefulVariables.getAllLecturers = UsefulVariables.con.prepareStatement(sql);
 
 
-        ResultSet result = usefulVariables.getAllLecturers.executeQuery();
+        ResultSet result = UsefulVariables.getAllLecturers.executeQuery();
 
         while (result.next()) {
 
@@ -942,9 +977,9 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from lecturer WHERE idlecturer = ?";
-        usefulVariables.getAllLecturers = con.prepareStatement(sql);
-        usefulVariables.getAllLecturers.setString(1, idlecturer);
-        ResultSet resultAllStudents = usefulVariables.getAllLecturers.executeQuery();
+        UsefulVariables.getAllLecturers = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getAllLecturers.setString(1, idlecturer);
+        ResultSet resultAllStudents = UsefulVariables.getAllLecturers.executeQuery();
 
 
         while (resultAllStudents.next()) {
@@ -1031,14 +1066,14 @@ public class AdminMainPage implements Initializable {
 
 
         Class.forName("com.mysql.jdbc.Driver");
-        PreparedStatement getStudents;
+
 
         String sql = "Select * from collegeBranches";
 
-        usefulVariables.getAllBranches = con.prepareStatement(sql);
+        UsefulVariables.getAllBranches = UsefulVariables.con.prepareStatement(sql);
 
 
-        ResultSet result = usefulVariables.getAllBranches.executeQuery();
+        ResultSet result = UsefulVariables.getAllBranches.executeQuery();
 
         while (result.next()) {
 
@@ -1073,9 +1108,9 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from collegeBranches WHERE unit = ?";
-        usefulVariables.getAllBranches = con.prepareStatement(sql);
-        usefulVariables.getAllBranches.setString(1, idlecturer);
-        ResultSet resultAllBranches = usefulVariables.getAllBranches.executeQuery();
+        UsefulVariables.getAllBranches = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getAllBranches.setString(1, idlecturer);
+        ResultSet resultAllBranches = UsefulVariables.getAllBranches.executeQuery();
 
 
         while (resultAllBranches.next()) {
@@ -1147,10 +1182,10 @@ public class AdminMainPage implements Initializable {
 
         String sql = "Select * from course";
 
-        usefulVariables.getAllCourses = con.prepareStatement(sql);
+        UsefulVariables.getAllCourses = UsefulVariables.con.prepareStatement(sql);
 
 
-        ResultSet result = usefulVariables.getAllCourses.executeQuery();
+        ResultSet result = UsefulVariables.getAllCourses.executeQuery();
 
         while (result.next()) {
 
@@ -1186,9 +1221,9 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from course WHERE name = ?";
-        usefulVariables.getAllCourses = con.prepareStatement(sql);
-        usefulVariables.getAllCourses.setString(1, courseName);
-        ResultSet resultAllBranches = usefulVariables.getAllCourses.executeQuery();
+        UsefulVariables.getAllCourses = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getAllCourses.setString(1, courseName);
+        ResultSet resultAllBranches = UsefulVariables.getAllCourses.executeQuery();
 
 
         while (resultAllBranches.next()) {
@@ -1272,10 +1307,10 @@ public class AdminMainPage implements Initializable {
 
         String sql = "Select * from module";
 
-        usefulVariables.getAllModules = con.prepareStatement(sql);
+        UsefulVariables.getAllModules = UsefulVariables.con.prepareStatement(sql);
 
 
-        ResultSet result = usefulVariables.getAllModules.executeQuery();
+        ResultSet result = UsefulVariables.getAllModules.executeQuery();
 
         while (result.next()) {
 
@@ -1313,9 +1348,9 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from module WHERE subject = ?";
-        usefulVariables.getAllModules = con.prepareStatement(sql);
-        usefulVariables.getAllModules.setString(1, courseName);
-        ResultSet resultAllModules = usefulVariables.getAllModules.executeQuery();
+        UsefulVariables.getAllModules = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getAllModules.setString(1, courseName);
+        ResultSet resultAllModules = UsefulVariables.getAllModules.executeQuery();
 
 
         while (resultAllModules.next()) {
@@ -1402,8 +1437,8 @@ public class AdminMainPage implements Initializable {
 
         String sql = "Select * from courseYear";
 
-        usefulVariables.getAllCourseYear = con.prepareStatement(sql);
-        ResultSet result = usefulVariables.getAllCourseYear.executeQuery();
+        UsefulVariables.getAllCourseYear = UsefulVariables.con.prepareStatement(sql);
+        ResultSet result = UsefulVariables.getAllCourseYear.executeQuery();
 
         while (result.next()) {
 
@@ -1439,9 +1474,9 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select * from courseYear WHERE moduleName = ?";
-        usefulVariables.getAllCourseYear = con.prepareStatement(sql);
-        usefulVariables.getAllCourseYear.setString(1, moduleName);
-        ResultSet resultAllModules = usefulVariables.getAllCourseYear.executeQuery();
+        UsefulVariables.getAllCourseYear = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getAllCourseYear.setString(1, moduleName);
+        ResultSet resultAllModules = UsefulVariables.getAllCourseYear.executeQuery();
 
 
         while (resultAllModules.next()) {
@@ -1501,16 +1536,17 @@ public class AdminMainPage implements Initializable {
 
 
     @FXML
-    private ObservableList<PaymentsMaster> getStudentPaymentList() throws ClassNotFoundException, SQLException {
+    private ObservableList<PaymentsMaster> getStudentPaymentList(String studentid) throws ClassNotFoundException, SQLException {
 
         Class.forName("com.mysql.jdbc.Driver");
 
         ObservableList<PaymentsMaster> list = FXCollections.observableArrayList();
 
 
-        String sql = "Select * from payments";
-        usefulVariables.getPayments = con.prepareStatement(sql);
-        ResultSet result = usefulVariables.getPayments.executeQuery();
+        String sql = "Select * from payments WHERE idstudent = ?";
+        UsefulVariables.getPayments = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getPayments.setString(1, studentid);
+        ResultSet result = UsefulVariables.getPayments.executeQuery();
 
 
         while (result.next()) {
@@ -1544,13 +1580,13 @@ public class AdminMainPage implements Initializable {
 
 
         String sql = "select idstudent from payments WHERE idstudent = ?";
-        usefulVariables.getPayments = con.prepareStatement(sql);
-        usefulVariables.getPayments.setString(1, studentid);
-        ResultSet resultPaymentLog = usefulVariables.getPayments.executeQuery();
+        UsefulVariables.getPayments = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getPayments.setString(1, studentid);
+        ResultSet resultPaymentLog = UsefulVariables.getPayments.executeQuery();
 
 
         while (resultPaymentLog.next()) {
-            insertStudentIDPayments.setText(resultPaymentLog.getString("idstudent"));
+            studentsInDebt.setValue(resultPaymentLog.getString("idstudent"));
 
 
         }
@@ -1560,7 +1596,7 @@ public class AdminMainPage implements Initializable {
 
 
     @FXML
-    private void refreshPaymentLog() {
+    private void refreshPaymentLog(String idStudent) {
 
 
         col_paymentsID.setCellValueFactory(new PropertyValueFactory<>("paymentid"));
@@ -1570,7 +1606,7 @@ public class AdminMainPage implements Initializable {
 
 
         try {
-            tableViewPayments.getItems().setAll(getStudentPaymentList());
+            tableViewPayments.getItems().setAll(getStudentPaymentList(idStudent));
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -1595,8 +1631,29 @@ public class AdminMainPage implements Initializable {
             alert.setHeaderText("No more payments needed for this student!!!");
             alert.show();
         } else {
-            refreshPaymentLog();
+            refreshPaymentLog(idStudent);
         }
+
+
+    }
+
+
+    private Integer getAmountOfPayments(String idStudent) throws ClassNotFoundException, SQLException {
+
+        Integer amount = 0;
+        Class.forName("com.mysql.jdbc.Driver");
+
+        String sql = "select numberOfInstallments from student WHERE idstudent = ?";
+        UsefulVariables.getAmountInstallments = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.getAmountInstallments.setString(1, idStudent);
+        ResultSet result = UsefulVariables.getAmountInstallments.executeQuery();
+
+        while (result.next()){
+            amount = result.getInt("numberOfInstallments");
+        }
+
+
+        return amount;
 
 
     }

@@ -1,5 +1,8 @@
 package JavaProject.entities;
 
+import JavaProject.queriesSQL.UsefulVariables;
+import javafx.scene.control.Alert;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -14,32 +17,32 @@ public class Admin extends Person {
     private ArrayList<CollegeBranch> listOfBranches = new ArrayList<>();
 
 
-    final static String URL = "jdbc:mysql://127.0.0.1:3306/collegeManagementSystem?autoReconnect=true&useSSL=false";
-    final static String DB_USER = "root";
-    final static String DB_PASSWORD = "M@rcus2020";
+//    final static String URL = "jdbc:mysql://127.0.0.1:3306/collegeManagementSystem?autoReconnect=true&useSSL=false";
+//    final static String DB_USER = "root";
+//    final static String DB_PASSWORD = "M@rcus2020";
+//
+//    private PreparedStatement createBranchQuery;
+//    private PreparedStatement deleteBranchQuery;
+//    private PreparedStatement editBranchQuery;
+//    private PreparedStatement createStudentQuery;
+//    private PreparedStatement deleteStudentQuery;
+//    private PreparedStatement editStudentQuery;
+//    private PreparedStatement createLecturerQuery;
+//    private PreparedStatement deleteLecturerQuery;
+//    private PreparedStatement editLecturerQuery;
+//    private PreparedStatement createAdminQuery;
+//    private PreparedStatement createModuleQuery;
+//    private PreparedStatement deleteModuleQuery;
+//    private PreparedStatement editModuleQuery;
+//    private PreparedStatement createCourseQuery;
+//    private PreparedStatement deleteCourseQuery;
+//    private PreparedStatement editCourseQuery;
+//    private PreparedStatement addStudentModuleQuery;
+//    private PreparedStatement createCourseYear;
+//    private PreparedStatement addPaymentQuery;
 
-    private PreparedStatement createBranchQuery;
-    private PreparedStatement deleteBranchQuery;
-    private PreparedStatement editBranchQuery;
-    private PreparedStatement createStudentQuery;
-    private PreparedStatement deleteStudentQuery;
-    private PreparedStatement editStudentQuery;
-    private PreparedStatement createLecturerQuery;
-    private PreparedStatement deleteLecturerQuery;
-    private PreparedStatement editLecturerQuery;
-    private PreparedStatement createAdminQuery;
-    private PreparedStatement createModuleQuery;
-    private PreparedStatement deleteModuleQuery;
-    private PreparedStatement editModuleQuery;
-    private PreparedStatement createCourseQuery;
-    private PreparedStatement deleteCourseQuery;
-    private PreparedStatement editCourseQuery;
-    private PreparedStatement addStudentModuleQuery;
-    private PreparedStatement createCourseYear;
-    private PreparedStatement addPaymentQuery;
 
-
-    private Connection con = DriverManager.getConnection(URL, DB_USER, DB_PASSWORD);
+//    private Connection con = DriverManager.getConnection(URL, DB_USER, DB_PASSWORD);
 
 
     public Admin(String first_name, String last_name, String gender, String phone, String dob, String emailAddress, String adminId, String password) throws SQLException {
@@ -60,19 +63,19 @@ public class Admin extends Person {
 
         String sql = "INSERT INTO admin(firstName, lastName, gender, phoneNumber, dob, emailAddress, adminID," +
                 " password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        createAdminQuery = con.prepareStatement(sql);
+        UsefulVariables.createAdminQuery = UsefulVariables.con.prepareStatement(sql);
 
-        createAdminQuery.setString(1, first_name);
-        createAdminQuery.setString(2, last_name);
-        createAdminQuery.setString(3, gender);
-        createAdminQuery.setString(4, phone);
-        createAdminQuery.setString(5, dob);
-        createAdminQuery.setString(6, emailAddress);
-        createAdminQuery.setString(7, adminId);
-        createAdminQuery.setString(8, password);
+        UsefulVariables.createAdminQuery.setString(1, first_name);
+        UsefulVariables.createAdminQuery.setString(2, last_name);
+        UsefulVariables.createAdminQuery.setString(3, gender);
+        UsefulVariables.createAdminQuery.setString(4, phone);
+        UsefulVariables.createAdminQuery.setString(5, dob);
+        UsefulVariables.createAdminQuery.setString(6, emailAddress);
+        UsefulVariables.createAdminQuery.setString(7, adminId);
+        UsefulVariables.createAdminQuery.setString(8, password);
 
 
-        createAdminQuery.execute();
+        UsefulVariables.createAdminQuery.execute();
 
     }
 
@@ -81,12 +84,12 @@ public class Admin extends Person {
         Class.forName("com.mysql.jdbc.Driver");
 
         String sql = "INSERT INTO collegeBranches(unit, address) VALUES (?, ?)";
-        createBranchQuery = con.prepareStatement(sql);
+        UsefulVariables.createBranchQuery = UsefulVariables.con.prepareStatement(sql);
 
-        createBranchQuery.setString(1, unit);
-        createBranchQuery.setString(2, address);
+        UsefulVariables.createBranchQuery.setString(1, unit);
+        UsefulVariables.createBranchQuery.setString(2, address);
 
-        createBranchQuery.execute();
+        UsefulVariables.createBranchQuery.execute();
 
 
     }
@@ -98,19 +101,19 @@ public class Admin extends Person {
 
         String sql = "INSERT INTO lecturer(firstName, lastName, gender, phone, dob, emailAddress, idlecturer," +
                 " password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        createLecturerQuery = con.prepareStatement(sql);
+        UsefulVariables.createLecturerQuery = UsefulVariables.con.prepareStatement(sql);
 
-        createLecturerQuery.setString(1, first_name);
-        createLecturerQuery.setString(2, last_name);
-        createLecturerQuery.setString(3, gender);
-        createLecturerQuery.setString(4, phone);
-        createLecturerQuery.setString(5, dob);
-        createLecturerQuery.setString(6, emailAddress);
-        createLecturerQuery.setString(7, lecturerId);
-        createLecturerQuery.setString(8, password);
+        UsefulVariables.createLecturerQuery.setString(1, first_name);
+        UsefulVariables.createLecturerQuery.setString(2, last_name);
+        UsefulVariables.createLecturerQuery.setString(3, gender);
+        UsefulVariables.createLecturerQuery.setString(4, phone);
+        UsefulVariables.createLecturerQuery.setString(5, dob);
+        UsefulVariables.createLecturerQuery.setString(6, emailAddress);
+        UsefulVariables.createLecturerQuery.setString(7, lecturerId);
+        UsefulVariables.createLecturerQuery.setString(8, password);
 
 
-        createLecturerQuery.execute();
+        UsefulVariables.createLecturerQuery.execute();
     }
 
 
@@ -125,23 +128,23 @@ public class Admin extends Person {
                 " password, collegeBranch, course, isPaidFull, courseYear) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 
-        createStudentQuery = con.prepareStatement(sql);
+        UsefulVariables.createStudentQuery = UsefulVariables.con.prepareStatement(sql);
 
-        createStudentQuery.setString(1, first_name);
-        createStudentQuery.setString(2, last_name);
-        createStudentQuery.setString(3, gender);
-        createStudentQuery.setString(4, phone);
-        createStudentQuery.setString(5, dob);
-        createStudentQuery.setString(6, emailAddress);
-        createStudentQuery.setString(7, studentId);
-        createStudentQuery.setString(8, password);
-        createStudentQuery.setString(9, collegeBranchName);
-        createStudentQuery.setString(10, courseName);
-        createStudentQuery.setBoolean(11, isPaidFull);
-        createStudentQuery.setInt(12, courseYear);
+        UsefulVariables.createStudentQuery.setString(1, first_name);
+        UsefulVariables.createStudentQuery.setString(2, last_name);
+        UsefulVariables.createStudentQuery.setString(3, gender);
+        UsefulVariables.createStudentQuery.setString(4, phone);
+        UsefulVariables.createStudentQuery.setString(5, dob);
+        UsefulVariables.createStudentQuery.setString(6, emailAddress);
+        UsefulVariables.createStudentQuery.setString(7, studentId);
+        UsefulVariables.createStudentQuery.setString(8, password);
+        UsefulVariables.createStudentQuery.setString(9, collegeBranchName);
+        UsefulVariables.createStudentQuery.setString(10, courseName);
+        UsefulVariables.createStudentQuery.setBoolean(11, isPaidFull);
+        UsefulVariables.createStudentQuery.setInt(12, courseYear);
 
 
-        createStudentQuery.execute();
+        UsefulVariables.createStudentQuery.execute();
 
     }
 
@@ -154,10 +157,10 @@ public class Admin extends Person {
 
         String sql = "DELETE from student WHERE idstudent = '" + studentID + "'";
 
-        deleteStudentQuery = con.prepareStatement(sql);
+        UsefulVariables.deleteStudentQuery = UsefulVariables.con.prepareStatement(sql);
 
 
-        deleteStudentQuery.execute();
+        UsefulVariables.deleteStudentQuery.execute();
 
 
     }
@@ -169,10 +172,10 @@ public class Admin extends Person {
 
         String sql = "DELETE from course WHERE collegeBranchUnit = '" + collegeBranchUnit + "' AND name = '" + courseName + "'";
 
-        deleteCourseQuery = con.prepareStatement(sql);
+        UsefulVariables.deleteCourseQuery = UsefulVariables.con.prepareStatement(sql);
 
 
-        deleteCourseQuery.execute();
+        UsefulVariables.deleteCourseQuery.execute();
 
 
     }
@@ -183,10 +186,10 @@ public class Admin extends Person {
 
         String sql = "DELETE from module WHERE subject = '" + subject + "'";
 
-        deleteModuleQuery = con.prepareStatement(sql);
+        UsefulVariables.deleteModuleQuery = UsefulVariables.con.prepareStatement(sql);
 
 
-        deleteModuleQuery.execute();
+        UsefulVariables.deleteModuleQuery.execute();
 
     }
 
@@ -199,10 +202,10 @@ public class Admin extends Person {
 
         String sql = "DELETE from lecturer WHERE idlecturer = '" + lecturerId + "'";
 
-        deleteLecturerQuery = con.prepareStatement(sql);
+        UsefulVariables.deleteLecturerQuery = UsefulVariables.con.prepareStatement(sql);
 
 
-        deleteLecturerQuery.execute();
+        UsefulVariables.deleteLecturerQuery.execute();
 
 
     }
@@ -214,11 +217,11 @@ public class Admin extends Person {
         Class.forName("com.mysql.jdbc.Driver");
 
         String sql = "DELETE FROM collegeBranches WHERE unit = ?";
-        deleteBranchQuery = con.prepareStatement(sql);
+        UsefulVariables.deleteBranchQuery = UsefulVariables.con.prepareStatement(sql);
 
-        deleteBranchQuery.setString(1, branchUnit);
+        UsefulVariables.deleteBranchQuery.setString(1, branchUnit);
 
-        deleteBranchQuery.execute();
+        UsefulVariables.deleteBranchQuery.execute();
 
 
     }
@@ -230,16 +233,16 @@ public class Admin extends Person {
 
         String sql = "INSERT INTO module(subject, course, collegeBranch, weekDay, classHour, idlecturer) VALUES (?, ?, ?, ?, ?, ?)";
 
-        createModuleQuery = con.prepareStatement(sql);
+        UsefulVariables.createModuleQuery = UsefulVariables.con.prepareStatement(sql);
 
-        createModuleQuery.setString(1, moduleName);
-        createModuleQuery.setString(2, courseName);
-        createModuleQuery.setString(3, collegeBranchUnit);
-        createModuleQuery.setString(4, weekDay);
-        createModuleQuery.setString(5, classHour);
-        createModuleQuery.setString(6, lecturerId);
+        UsefulVariables.createModuleQuery.setString(1, moduleName);
+        UsefulVariables.createModuleQuery.setString(2, courseName);
+        UsefulVariables.createModuleQuery.setString(3, collegeBranchUnit);
+        UsefulVariables.createModuleQuery.setString(4, weekDay);
+        UsefulVariables.createModuleQuery.setString(5, classHour);
+        UsefulVariables.createModuleQuery.setString(6, lecturerId);
 
-        createModuleQuery.execute();
+        UsefulVariables.createModuleQuery.execute();
 
 
     }
@@ -250,13 +253,13 @@ public class Admin extends Person {
 
         String sql = "INSERT INTO course(collegeBranchUnit, name, price) VALUES (?, ?, ?)";
 
-        createCourseQuery = con.prepareStatement(sql);
+        UsefulVariables.createCourseQuery = UsefulVariables.con.prepareStatement(sql);
 
-        createCourseQuery.setString(1, collegeBranchUnit);
-        createCourseQuery.setString(2, name);
-        createCourseQuery.setDouble(3, price);
+        UsefulVariables.createCourseQuery.setString(1, collegeBranchUnit);
+        UsefulVariables.createCourseQuery.setString(2, name);
+        UsefulVariables.createCourseQuery.setDouble(3, price);
 
-        createCourseQuery.execute();
+        UsefulVariables.createCourseQuery.execute();
 
 
     }
@@ -268,13 +271,13 @@ public class Admin extends Person {
 
         String sql = "INSERT INTO studentInModule(idStudent, moduleName) VALUES (?, ?)";
 
-        addStudentModuleQuery = con.prepareStatement(sql);
+        UsefulVariables.addStudentModuleQuery = UsefulVariables.con.prepareStatement(sql);
 
-        addStudentModuleQuery.setString(1, studentId);
-        addStudentModuleQuery.setString(2, moduleSubject);
+        UsefulVariables.addStudentModuleQuery.setString(1, studentId);
+        UsefulVariables.addStudentModuleQuery.setString(2, moduleSubject);
 
 
-        addStudentModuleQuery.execute();
+        UsefulVariables.addStudentModuleQuery.execute();
 
 
     }
@@ -285,13 +288,13 @@ public class Admin extends Person {
     public void createCourseYear(String year, String courseName, String moduleName) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.jdbc.Driver");
         String sql = "INSERT INTO courseYear(year, course, moduleName) VALUES (?, ?, ?)";
-        createCourseYear = con.prepareStatement(sql);
+        UsefulVariables.createCourseYear = UsefulVariables.con.prepareStatement(sql);
 
-        createCourseYear.setString(1, year);
-        createCourseYear.setString(2, courseName);
-        createCourseYear.setString(3, moduleName);
+        UsefulVariables.createCourseYear.setString(1, year);
+        UsefulVariables.createCourseYear.setString(2, courseName);
+        UsefulVariables.createCourseYear.setString(3, moduleName);
 
-        createCourseYear.execute();
+        UsefulVariables.createCourseYear.execute();
 
     }
 
@@ -309,28 +312,6 @@ public class Admin extends Person {
     }
 
 
-    // DELETING STUDENTS, LECTURERES AND BRANCHES
-
-    public void deleteStudent(String studentID, CollegeBranch cb) {
-
-        int counting = 0;
-
-        for (int i = 0; i < collegeBranch.getListOfStudents().size(); i++) {
-            counting++;
-            if (collegeBranch.getListOfStudents().get(i).getId().equalsIgnoreCase(studentID)) {
-                collegeBranch.getListOfStudents().remove(i);
-                System.out.println("Student removed");
-                break;
-            }
-        }
-
-        if (counting == collegeBranch.getListOfStudents().size()) {
-            System.out.println("This student does not exist in this branch!!!");
-        }
-
-    }
-
-
     // Add payment to student
     public boolean addPayment(String idStudent, String paymentDate) throws SQLException, ClassNotFoundException {
 
@@ -342,9 +323,9 @@ public class Admin extends Person {
 
 
         String sql = "SELECT numberOfInstallments FROM student WHERE idstudent = ?";
-        addPaymentQuery = con.prepareStatement(sql);
-        addPaymentQuery.setString(1, idStudent);
-        ResultSet numberInstallmentsResult = addPaymentQuery.executeQuery();
+        UsefulVariables.addPaymentQuery = UsefulVariables.con.prepareStatement(sql);
+        UsefulVariables.addPaymentQuery.setString(1, idStudent);
+        ResultSet numberInstallmentsResult = UsefulVariables.addPaymentQuery.executeQuery();
 
         while(numberInstallmentsResult.next()) {
             numberOfInstallments = Integer.parseInt(numberInstallmentsResult.getString("numberOfInstallments"));
@@ -353,10 +334,10 @@ public class Admin extends Person {
 
 
         String sql1 = "SELECT * FROM payments WHERE idstudent = ?";
-        addPaymentQuery = con.prepareStatement(sql1);
-        addPaymentQuery.setString(1, idStudent);
+        UsefulVariables.addPaymentQuery = UsefulVariables.con.prepareStatement(sql1);
+        UsefulVariables.addPaymentQuery.setString(1, idStudent);
 
-        ResultSet result = addPaymentQuery.executeQuery();
+        ResultSet result = UsefulVariables.addPaymentQuery.executeQuery();
 
         while(result.next()){
             count++;
@@ -368,22 +349,22 @@ public class Admin extends Person {
 
         if(numberOfInstallments - count > 0){
             String sql2 = "INSERT into payments(idstudent, paymentDate) VALUES (?,?)";
-            addPaymentQuery = con.prepareStatement(sql2);
+            UsefulVariables.addPaymentQuery = UsefulVariables.con.prepareStatement(sql2);
 
-            addPaymentQuery.setString(1, idStudent);
-            addPaymentQuery.setString(2, paymentDate);
-            addPaymentQuery.execute();
+            UsefulVariables.addPaymentQuery.setString(1, idStudent);
+            UsefulVariables.addPaymentQuery.setString(2, paymentDate);
+            UsefulVariables.addPaymentQuery.execute();
 
 
 
             return true;
         } else {
             String sql2 = "UPDATE student SET isPaidFull = ? WHERE idstudent = ?";
-            addPaymentQuery = con.prepareStatement(sql2);
-            addPaymentQuery.setBoolean(1, true);
-            addPaymentQuery.setString(2, idStudent);
+            UsefulVariables.addPaymentQuery = UsefulVariables.con.prepareStatement(sql2);
+            UsefulVariables.addPaymentQuery.setBoolean(1, true);
+            UsefulVariables.addPaymentQuery.setString(2, idStudent);
 
-            addPaymentQuery.execute();
+            UsefulVariables.addPaymentQuery.execute();
 
             return false;
         }
@@ -398,17 +379,16 @@ public class Admin extends Person {
 
     public void setInstallments(Integer installments, String studentId) throws ClassNotFoundException, SQLException {
 
-        PreparedStatement setInstall;
 
         Class.forName("com.mysql.jdbc.Driver");
         String sql = "UPDATE student SET numberOfInstallments = ? WHERE idstudent = ?";
-        setInstall = con.prepareStatement(sql);
+        UsefulVariables.setInstall = UsefulVariables.con.prepareStatement(sql);
 
-        setInstall.setInt(1, installments);
-        setInstall.setString(2, studentId);
+        UsefulVariables.setInstall.setInt(1, installments);
+        UsefulVariables.setInstall.setString(2, studentId);
 
 
-        setInstall.execute();
+        UsefulVariables.setInstall.execute();
 
     }
 
@@ -426,24 +406,24 @@ public class Admin extends Person {
                 "password = ?, collegeBranch = ?, course = ?, isPaidFull = ?, courseYear = ? WHERE idstudent=?";
 
 
-        editStudentQuery = con.prepareStatement(sql);
+        UsefulVariables.editStudentQuery = UsefulVariables.con.prepareStatement(sql);
 
-        editStudentQuery.setString(1, first_name);
-        editStudentQuery.setString(2, last_name);
-        editStudentQuery.setString(3, gender);
-        editStudentQuery.setString(4, phone);
-        editStudentQuery.setString(5, dob);
-        editStudentQuery.setString(6, emailAddress);
-        editStudentQuery.setString(7, studentId);
-        editStudentQuery.setString(8, password);
-        editStudentQuery.setString(9, collegeBranchName);
-        editStudentQuery.setString(10, courseName);
-        editStudentQuery.setBoolean(11, isPaidFull);
-        editStudentQuery.setInt(12, courseYear);
-        editStudentQuery.setString(13, col_idValue);
+        UsefulVariables.editStudentQuery.setString(1, first_name);
+        UsefulVariables.editStudentQuery.setString(2, last_name);
+        UsefulVariables.editStudentQuery.setString(3, gender);
+        UsefulVariables.editStudentQuery.setString(4, phone);
+        UsefulVariables.editStudentQuery.setString(5, dob);
+        UsefulVariables.editStudentQuery.setString(6, emailAddress);
+        UsefulVariables.editStudentQuery.setString(7, studentId);
+        UsefulVariables.editStudentQuery.setString(8, password);
+        UsefulVariables.editStudentQuery.setString(9, collegeBranchName);
+        UsefulVariables.editStudentQuery.setString(10, courseName);
+        UsefulVariables.editStudentQuery.setBoolean(11, isPaidFull);
+        UsefulVariables.editStudentQuery.setInt(12, courseYear);
+        UsefulVariables.editStudentQuery.setString(13, col_idValue);
 
 
-        editStudentQuery.execute();
+        UsefulVariables.editStudentQuery.execute();
     }
 
     public void editingLecturer(String first_name, String last_name, String gender, String phone, String dob, String emailAddress,
@@ -454,20 +434,20 @@ public class Admin extends Person {
         String sql = "UPDATE lecturer SET firstName = ?, lastName = ?, gender = ?, phone = ?, dob = ?, emailAddress = ?, idlecturer = ?," +
                 "password = ? WHERE idlecturer=?";
 
-        editLecturerQuery = con.prepareStatement(sql);
+        UsefulVariables.editLecturerQuery = UsefulVariables.con.prepareStatement(sql);
 
-        editLecturerQuery.setString(1, first_name);
-        editLecturerQuery.setString(2, last_name);
-        editLecturerQuery.setString(3, gender);
-        editLecturerQuery.setString(4, phone);
-        editLecturerQuery.setString(5, dob);
-        editLecturerQuery.setString(6, emailAddress);
-        editLecturerQuery.setString(7, lecturerId);
-        editLecturerQuery.setString(8, password);
-        editLecturerQuery.setString(9, col_idValue);
+        UsefulVariables.editLecturerQuery.setString(1, first_name);
+        UsefulVariables.editLecturerQuery.setString(2, last_name);
+        UsefulVariables.editLecturerQuery.setString(3, gender);
+        UsefulVariables.editLecturerQuery.setString(4, phone);
+        UsefulVariables.editLecturerQuery.setString(5, dob);
+        UsefulVariables.editLecturerQuery.setString(6, emailAddress);
+        UsefulVariables.editLecturerQuery.setString(7, lecturerId);
+        UsefulVariables.editLecturerQuery.setString(8, password);
+        UsefulVariables.editLecturerQuery.setString(9, col_idValue);
 
 
-        editLecturerQuery.execute();
+        UsefulVariables.editLecturerQuery.execute();
 
     }
 
@@ -476,13 +456,13 @@ public class Admin extends Person {
         Class.forName("com.mysql.jdbc.Driver");
 
         String sql = "UPDATE collegeBranches SET unit = ?, address = ? WHERE unit=?";
-        editBranchQuery = con.prepareStatement(sql);
+        UsefulVariables.editBranchQuery = UsefulVariables.con.prepareStatement(sql);
 
-        editBranchQuery.setString(1, unit);
-        editBranchQuery.setString(2, address);
-        editBranchQuery.setString(3, col_unit);
+        UsefulVariables.editBranchQuery.setString(1, unit);
+        UsefulVariables.editBranchQuery.setString(2, address);
+        UsefulVariables.editBranchQuery.setString(3, col_unit);
 
-        editBranchQuery.execute();
+        UsefulVariables.editBranchQuery.execute();
 
     }
     public void editingCourse(String collegeBranchUnit, String name, Double price, String col_courseName) throws ClassNotFoundException, SQLException {
@@ -491,14 +471,14 @@ public class Admin extends Person {
 
         String sql = "UPDATE course SET collegeBranchUnit = ?, name = ?, price = ? WHERE name=?";
 
-        editCourseQuery = con.prepareStatement(sql);
+        UsefulVariables.editCourseQuery = UsefulVariables.con.prepareStatement(sql);
 
-        editCourseQuery.setString(1, collegeBranchUnit);
-        editCourseQuery.setString(2, name);
-        editCourseQuery.setDouble(3, price);
-        editCourseQuery.setString(4, col_courseName);
+        UsefulVariables.editCourseQuery.setString(1, collegeBranchUnit);
+        UsefulVariables.editCourseQuery.setString(2, name);
+        UsefulVariables.editCourseQuery.setDouble(3, price);
+        UsefulVariables.editCourseQuery.setString(4, col_courseName);
 
-        editCourseQuery.execute();
+        UsefulVariables.editCourseQuery.execute();
 
     }
 
@@ -509,17 +489,17 @@ public class Admin extends Person {
 
         String sql = "UPDATE module SET subject = ?, course = ?, collegeBranch = ?, weekday = ?, classHour = ?, idlecturer = ? WHERE subject=?";
 
-        editModuleQuery = con.prepareStatement(sql);
+        UsefulVariables.editModuleQuery = UsefulVariables.con.prepareStatement(sql);
 
-        editModuleQuery.setString(1, moduleName);
-        editModuleQuery.setString(2, courseName);
-        editModuleQuery.setString(3, collegeBranchUnit);
-        editModuleQuery.setString(4, weekDay);
-        editModuleQuery.setString(5, classHour);
-        editModuleQuery.setString(6, lecturerId);
-        editModuleQuery.setString(7, col_moduleSubject);
+        UsefulVariables.editModuleQuery.setString(1, moduleName);
+        UsefulVariables.editModuleQuery.setString(2, courseName);
+        UsefulVariables.editModuleQuery.setString(3, collegeBranchUnit);
+        UsefulVariables.editModuleQuery.setString(4, weekDay);
+        UsefulVariables.editModuleQuery.setString(5, classHour);
+        UsefulVariables.editModuleQuery.setString(6, lecturerId);
+        UsefulVariables.editModuleQuery.setString(7, col_moduleSubject);
 
-        editModuleQuery.execute();
+        UsefulVariables.editModuleQuery.execute();
 
 
     }
