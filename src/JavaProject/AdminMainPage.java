@@ -483,7 +483,7 @@ public class AdminMainPage implements Initializable {
     private void toCreateCollegeBranch() throws SQLException, ClassNotFoundException {
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "INSERT INTO collegeBranches(unit, address) VALUES (?, ?)";
         UsefulVariables.createBranchQuery = UsefulVariables.con.prepareStatement(sql);
@@ -537,7 +537,7 @@ public class AdminMainPage implements Initializable {
 
     private ArrayList<String> getStudentsToPay() throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from student WHERE isPaidFull=?";
@@ -559,7 +559,7 @@ public class AdminMainPage implements Initializable {
 
     private ArrayList<String> getBranches() throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from collegeBranches";
@@ -579,7 +579,7 @@ public class AdminMainPage implements Initializable {
     private ArrayList<String> getCourses(String branchUnit) throws ClassNotFoundException, SQLException {
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "select * from course WHERE collegeBranchUnit = ?";
         UsefulVariables.getCourses = UsefulVariables.con.prepareStatement(sql);
@@ -601,7 +601,7 @@ public class AdminMainPage implements Initializable {
 
     private ArrayList<String> getLecturersId() throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from lecturer";
@@ -620,7 +620,7 @@ public class AdminMainPage implements Initializable {
 
     private ArrayList<String> getModules(String courseName) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from module WHERE course = ?";
@@ -640,7 +640,7 @@ public class AdminMainPage implements Initializable {
 
     private ArrayList<String> getCourseYears(String courseName) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from courseYear WHERE course = ?";
@@ -741,7 +741,7 @@ public class AdminMainPage implements Initializable {
         ObservableList<StudentMaster> list = FXCollections.observableArrayList();
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "Select * from student";
@@ -785,7 +785,7 @@ public class AdminMainPage implements Initializable {
 
         String idstudent = col_studentid.getCellData(indexStudent).toString();
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from student WHERE idstudent = ?";
@@ -931,7 +931,7 @@ public class AdminMainPage implements Initializable {
         ObservableList<LecturerMaster> list = FXCollections.observableArrayList();
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "Select * from lecturer";
@@ -973,7 +973,7 @@ public class AdminMainPage implements Initializable {
 
         String idlecturer = col_lecturerid.getCellData(indexLecturer).toString();
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from lecturer WHERE idlecturer = ?";
@@ -1065,7 +1065,7 @@ public class AdminMainPage implements Initializable {
         ObservableList<CollegeBranchMaster> list = FXCollections.observableArrayList();
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "Select * from collegeBranches";
@@ -1104,7 +1104,7 @@ public class AdminMainPage implements Initializable {
 
         String idlecturer = col_createbranchUnit.getCellData(indexBranches).toString();
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from collegeBranches WHERE unit = ?";
@@ -1178,7 +1178,7 @@ public class AdminMainPage implements Initializable {
         ObservableList<CoursesMaster> list = FXCollections.observableArrayList();
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "Select * from course";
 
@@ -1217,7 +1217,7 @@ public class AdminMainPage implements Initializable {
 
         String courseName = col_createCourseName.getCellData(indexCourse).toString();
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from course WHERE name = ?";
@@ -1303,7 +1303,7 @@ public class AdminMainPage implements Initializable {
         ObservableList<ModuleMaster> list = FXCollections.observableArrayList();
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "Select * from module";
 
@@ -1344,7 +1344,7 @@ public class AdminMainPage implements Initializable {
 
         String courseName = col_CreateModuleName.getCellData(indexModule).toString();
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from module WHERE subject = ?";
@@ -1433,7 +1433,7 @@ public class AdminMainPage implements Initializable {
         ObservableList<CourseYearMaster> list = FXCollections.observableArrayList();
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "Select * from courseYear";
 
@@ -1470,7 +1470,7 @@ public class AdminMainPage implements Initializable {
 
         String moduleName = col_createCourseYearModule.getCellData(indexCourseYear).toString();
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from courseYear WHERE moduleName = ?";
@@ -1538,7 +1538,7 @@ public class AdminMainPage implements Initializable {
     @FXML
     private ObservableList<PaymentsMaster> getStudentPaymentList(String studentid) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         ObservableList<PaymentsMaster> list = FXCollections.observableArrayList();
 
@@ -1576,7 +1576,7 @@ public class AdminMainPage implements Initializable {
 
         String studentid = col_paymentsStudentID.getCellData(indexPaymentLog).toString();
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select idstudent from payments WHERE idstudent = ?";
@@ -1641,7 +1641,7 @@ public class AdminMainPage implements Initializable {
     private Integer getAmountOfPayments(String idStudent) throws ClassNotFoundException, SQLException {
 
         Integer amount = 0;
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "select numberOfInstallments from student WHERE idstudent = ?";
         UsefulVariables.getAmountInstallments = UsefulVariables.con.prepareStatement(sql);

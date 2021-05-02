@@ -12,7 +12,7 @@ public class LoginQueries {
 
     public ResultSet loginAdmin(String id, String password) throws SQLException, ClassNotFoundException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection con = DriverManager.getConnection(URL, DB_USER, DB_PASSWORD);
 
@@ -37,7 +37,7 @@ public class LoginQueries {
 
     public ResultSet loginStudent(String id, String password) throws SQLException, ClassNotFoundException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection con = DriverManager.getConnection(URL, DB_USER, DB_PASSWORD);
 
@@ -59,7 +59,7 @@ public class LoginQueries {
 
     public ResultSet loginLecturer(String id, String password) throws SQLException, ClassNotFoundException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         Connection con = DriverManager.getConnection(URL, DB_USER, DB_PASSWORD);
 

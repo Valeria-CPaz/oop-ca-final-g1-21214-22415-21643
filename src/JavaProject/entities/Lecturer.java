@@ -22,7 +22,7 @@ public class Lecturer extends Person{
 
     public static void setGrade(String studentid, String modulename, Double grade, String lecturerid) throws Exception {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "INSERT INTO gradesModule (studentid, modulename, grade, lecturerid) VALUES (?,?,?,?)";
 
@@ -41,7 +41,7 @@ public class Lecturer extends Person{
     }
 
     public static void editGrade(Integer id, Double grade, String module) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "UPDATE gradesModule SET grade = ?, modulename = ? WHERE gradeid = ?";
 
@@ -61,7 +61,7 @@ public class Lecturer extends Person{
     public static void createAssignment(String dueDate, String description, String moduleSubject, String lecturerId) throws ClassNotFoundException, SQLException {
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "INSERT INTO assignment (dueDate, description, lecturerId, moduleSubject) VALUES (?,?,?,?)";
 
@@ -80,7 +80,7 @@ public class Lecturer extends Person{
 
     public static void deleteAssignment(Integer id) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "DELETE from assignment WHERE idassignment = '" + id + "'";
 
@@ -95,7 +95,7 @@ public class Lecturer extends Person{
     public static void editAssignment(Integer id, String dueDate, String description, String moduleSubject) throws ClassNotFoundException, SQLException {
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "UPDATE assignment SET dueDate = ?, description = ?, moduleSubject = ? WHERE idassignment = ?";
 
@@ -116,7 +116,7 @@ public class Lecturer extends Person{
     public static void createExam(String date, String module, String lecturerid) throws ClassNotFoundException, SQLException {
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "INSERT INTO exam (date, lecturerId, module) VALUES (?,?,?)";
 
@@ -135,7 +135,7 @@ public class Lecturer extends Person{
 
     public static void editExam(String date, String module, Integer id) throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "UPDATE exam SET date = ?, module = ? WHERE idexam = ?";
 
@@ -151,7 +151,7 @@ public class Lecturer extends Person{
     }
 
     public static void deleteExam(Integer id) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "DELETE from exam WHERE idexam = '" + id + "'";
 

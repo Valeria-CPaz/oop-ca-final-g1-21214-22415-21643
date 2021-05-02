@@ -170,7 +170,7 @@ public class MainPageLecturer implements Initializable {
 
     private ArrayList<String> getModules() throws ClassNotFoundException, SQLException {
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from module WHERE idlecturer = ?";
@@ -216,7 +216,7 @@ public class MainPageLecturer implements Initializable {
         ObservableList<AssigmentMaster> list = FXCollections.observableArrayList();
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "Select * from assignment WHERE lecturerId = ?";
 
@@ -257,9 +257,7 @@ public class MainPageLecturer implements Initializable {
 
         int assignmentId = col_assignmentId.getCellData(indexAssignments);
 
-        Class.forName("com.mysql.jdbc.Driver");
-
-        System.out.println(assignmentId);
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from assignment WHERE idassignment = ?";
@@ -389,7 +387,7 @@ public class MainPageLecturer implements Initializable {
         ObservableList<GradesMaster> list = FXCollections.observableArrayList();
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "Select * from gradesModule WHERE lecturerid = ?";
 
@@ -429,9 +427,7 @@ public class MainPageLecturer implements Initializable {
 
         int gradesId = col_gradesId.getCellData(indexGrades);
 
-        Class.forName("com.mysql.jdbc.Driver");
-
-        System.out.println(gradesId);
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
         String sql = "select * from gradesModule WHERE gradeid = ?";
@@ -596,7 +592,7 @@ public class MainPageLecturer implements Initializable {
         ObservableList<ExamsMaster> list = FXCollections.observableArrayList();
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql = "Select * from exam WHERE lecturerId = ?";
 
@@ -635,7 +631,7 @@ public class MainPageLecturer implements Initializable {
 
         int examsId = col_examsId.getCellData(indexExam);
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
 
 
@@ -701,7 +697,7 @@ public class MainPageLecturer implements Initializable {
     private ArrayList<String> getStudents(String moduleName) throws ClassNotFoundException, SQLException {
 
 
-        Class.forName("com.mysql.jdbc.Driver");
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
         String sql1 = "select * from courseYear WHERE moduleName = ?";
         PreparedStatement getcourseYearList = UsefulVariables.con.prepareStatement(sql1);
