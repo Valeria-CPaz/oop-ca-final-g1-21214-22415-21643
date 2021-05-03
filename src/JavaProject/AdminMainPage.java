@@ -212,16 +212,15 @@ public class AdminMainPage implements Initializable {
         studentsInDebt.setOnAction(actionEvent -> {
 
             String studentId = studentsInDebt.getValue();
-            int installments = 0;
+
             try {
-                installments = getAmountOfPayments(studentId);
+                labelAmountOfInstallments.setText(String.format
+                        ("The student has to pay %d left to be paid", getAmountOfPayments(studentId)));
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-
-            labelAmountOfInstallments.setText(String.format("The student has to pay %d installments in total", installments));
             refreshPaymentLog(studentId);
 
         });
@@ -649,9 +648,18 @@ public class AdminMainPage implements Initializable {
         ResultSet resultBranches = UsefulVariables.getModules.executeQuery();
 
         ArrayList<String> allYears = new ArrayList<>();
+        int count = 0;
 
         while (resultBranches.next()) {
-            allYears.add(resultBranches.getString("year"));
+            for (String year : allYears){
+                if (year.equalsIgnoreCase(resultBranches.getString("year"))){
+                    count++;
+                }
+            }
+
+            if(count==0){
+                allYears.add(resultBranches.getString("year"));
+            }
         }
 
 
@@ -1440,6 +1448,8 @@ public class AdminMainPage implements Initializable {
         UsefulVariables.getAllCourseYear = UsefulVariables.con.prepareStatement(sql);
         ResultSet result = UsefulVariables.getAllCourseYear.executeQuery();
 
+
+
         while (result.next()) {
 
             CourseYearMaster courseYearMaster = new CourseYearMaster();
@@ -1631,8 +1641,12 @@ public class AdminMainPage implements Initializable {
             alert.setHeaderText("No more payments needed for this student!!!");
             alert.show();
         } else {
+            labelAmountOfInstallments.setText(String.format
+                    ("The student has to pay %d left to be paid", getAmountOfPayments(idStudent)));
             refreshPaymentLog(idStudent);
         }
+
+
 
 
     }
@@ -1652,8 +1666,21 @@ public class AdminMainPage implements Initializable {
             amount = result.getInt("numberOfInstallments");
         }
 
+        Class.forName("com.mysql.cj.jdbc.Driver");
 
-        return amount;
+        String sql1 = "select count(*) from payments WHERE idstudent = ?";
+        UsefulVariables.getAmountInstallments = UsefulVariables.con.prepareStatement(sql1);
+        UsefulVariables.getAmountInstallments.setString(1, idStudent);
+        ResultSet resultTwo = UsefulVariables.getAmountInstallments.executeQuery();
+
+        int count = 0;
+
+        while(resultTwo.next()){
+            count = resultTwo.getInt(1);
+        }
+
+
+        return (amount - count);
 
 
     }

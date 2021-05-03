@@ -343,8 +343,6 @@ public class Admin extends Person {
             count++;
         }
 
-        System.out.println(numberOfInstallments+" = number of installments");
-        System.out.println(count + " = count");
 
 
         if(numberOfInstallments - count > 0){
