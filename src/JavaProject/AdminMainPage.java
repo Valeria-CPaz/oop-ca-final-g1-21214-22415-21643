@@ -285,6 +285,7 @@ public class AdminMainPage implements Initializable {
         studentIsPaid.getSelectionModel().clearSelection();
 
         refreshStudentTable();
+        studentsInDebt.getItems().add(insertStudentId.getText());
 
 
     }
