@@ -271,6 +271,8 @@ public class AdminMainPage implements Initializable {
         alert.setHeaderText("Student created");
         alert.show();
 
+        studentsInDebt.getItems().add(insertStudentId.getText());
+
         insertStudentFirstName.clear();
         insertStudentLastName.clear();
         genderStudent.getSelectionModel().clearSelection();
@@ -285,7 +287,7 @@ public class AdminMainPage implements Initializable {
         studentIsPaid.getSelectionModel().clearSelection();
 
         refreshStudentTable();
-        studentsInDebt.getItems().add(insertStudentId.getText());
+
 
 
     }
@@ -328,6 +330,9 @@ public class AdminMainPage implements Initializable {
         alert.setHeaderText("Student deleted");
         alert.show();
 
+        studentsInDebt.getItems().remove(insertStudentId.getText());
+
+
         insertStudentFirstName.clear();
         insertStudentLastName.clear();
         genderStudent.getSelectionModel().clearSelection();
@@ -340,6 +345,9 @@ public class AdminMainPage implements Initializable {
         studentInCourse.getSelectionModel().clearSelection();
         addStudentCourseYear.getSelectionModel().clearSelection();
         studentIsPaid.getSelectionModel().clearSelection();
+
+        refreshStudentTable();
+
     }
 
     @FXML
@@ -360,6 +368,9 @@ public class AdminMainPage implements Initializable {
         lecturerEmail.clear();
         createLecturerId.clear();
         lecturerpassword.clear();
+
+        refreshLecturerTable();
+
 
     }
 
@@ -429,6 +440,9 @@ public class AdminMainPage implements Initializable {
         courseNameInput.clear();
         coursePrice.clear();
 
+        refreshCourse();
+
+
 
     }
 
@@ -474,6 +488,9 @@ public class AdminMainPage implements Initializable {
         createModuleName.clear();
         createModuleAddBranch.getSelectionModel().clearSelection();
         createModuleName.clear();
+
+        refreshModule();
+
 
     }
 
