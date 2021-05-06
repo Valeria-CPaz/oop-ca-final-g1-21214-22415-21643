@@ -57,7 +57,8 @@ In the VM options field, specify the following options, but make sure to replace
 --module-path /path/to/javafx/sdk --add-modules javafx.controls,javafx.fxml
 
 
-![Uploading add vm intellij.gif…]()
+![add vm intellij](https://user-images.githubusercontent.com/63955638/117359957-12ee0d00-aeb0-11eb-8ab7-06342edcadfa.gif)
+
 
 
 This way you're machine will be able to run the program with the Javafx library without any troubles.
