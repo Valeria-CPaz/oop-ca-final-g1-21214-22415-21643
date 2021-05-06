@@ -1,8 +1,8 @@
 
 
-CREATE DATABASE collegemanagementsystem;
+CREATE DATABASE collegeManagementSystem;
 
-USE collegemanagementsystem;
+USE collegeManagementSystem;
 
 
 

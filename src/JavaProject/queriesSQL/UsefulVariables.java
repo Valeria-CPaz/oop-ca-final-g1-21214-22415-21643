@@ -7,9 +7,13 @@ import java.sql.SQLException;
 
 public class UsefulVariables {
 
-    public final static String URL = "jdbc:mysql://127.0.0.1:3306/collegeManagementSystem?autoReconnect=true&useSSL=false";
+    public final static String DB_NAME = "collegeManagementSystem";
+
+    public final static String URL = "jdbc:mysql://127.0.0.1:3306/" + DB_NAME +"?autoReconnect=true&useSSL=false";
     public final static String DB_USER = "root";
     public final static String DB_PASSWORD = "M@rcus2020";
+
+    public final static String CLASS_INFO = "com.mysql.cj.jdbc.Driver";
 
 
     public static Connection con;
