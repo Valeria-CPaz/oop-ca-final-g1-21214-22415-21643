@@ -8,7 +8,7 @@
 
 
 
-#GETTING STARTED WITH JAVAFX
+# GETTING STARTED WITH JAVAFX
 
 The present java project uses as Graphic Interface Javafx library.
 
