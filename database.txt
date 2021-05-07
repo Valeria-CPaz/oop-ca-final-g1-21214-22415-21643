@@ -151,7 +151,7 @@ CREATE TABLE `courseyear` (
   `moduleName` varchar(45) NOT NULL,
   KEY `fk` (`course`),
   KEY `index2` (`moduleName`),
-  CONSTRAINT `fk_courseYear_1` FOREIGN KEY (`course`) REFERENCES `course` (`name`),
+  CONSTRAINT `fk_courseYear_1` FOREIGN KEY (`course`) REFERENCES `course` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_courseYear_2` FOREIGN KEY (`moduleName`) REFERENCES `module` (`subject`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
