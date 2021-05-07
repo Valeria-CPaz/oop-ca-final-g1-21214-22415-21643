@@ -6,6 +6,9 @@
 ## Object Oriented Programming - CA3
 ### DATE: 06/05/2021
 
+GitHub Link: https://github.com/Valeria-CPaz/oop-ca-final-g1-21214-22415-21643
+YouTube Walkthrough: https://youtu.be/OiZ53sIza6I
+
 
 # Important information
 
