@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import JavaProject.entities.*;
 
@@ -12,10 +13,6 @@ import JavaProject.queriesSQL.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import JavaProject.tableviewPOJO.UserLoginPOJO;
 
 import java.net.URL;
@@ -25,7 +22,6 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
 
-
     private LoginQueries loginQueries = new LoginQueries();
     private Stage stage;
     private Scene scene;
@@ -33,7 +29,7 @@ public class LoginController implements Initializable {
     private Admin admin;
     private Student student;
     private Lecturer lecturer;
-    
+
     private static String userId;
 
     @FXML
@@ -75,24 +71,36 @@ public class LoginController implements Initializable {
                         result.getString("emailAddress"), result.getString("adminID"), result.getString("password"));
             }
 
-
-            if (admin.getPassword().equals(password) && admin.getId().equals(userId)) {
-
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminMainPage.fxml"));
-                Parent root = loader.load();
-
-                AdminMainPage adminMainPage = loader.getController();
-                adminMainPage.setAdmin(admin);
+            if (admin != null) {
 
 
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                if (admin.getPassword().equals(password) && admin.getId().equals(userId)) {
 
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminMainPage.fxml"));
+                    Parent root = loader.load();
+
+                    AdminMainPage adminMainPage = loader.getController();
+                    adminMainPage.setAdmin(admin);
+
+
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+
+                } else {
+//                    throw new Exception("Wrong password");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("");
+                    alert.setHeaderText("Admin user doesn't exist OR wrong password");
+                    alert.show();
+                }
             } else {
-                throw new Exception("Wrong password");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText("Admin user doesn't exist OR wrong password");
+                alert.show();
             }
 
 
@@ -110,24 +118,33 @@ public class LoginController implements Initializable {
                         result.getString("courseYear"));
             }
 
+            if (student != null) {
+                if (student.getPassword().equals(password) && student.getId().equals(userId)) {
 
-            if (student.getPassword().equals(password) && student.getId().equals(userId)) {
 
+                    UserLoginPOJO.setUserFullName(student.getFirstName() + " " + student.getLastName());
+                    UserLoginPOJO.setUserID(student.getId());
+                    UserLoginPOJO.setStudentYear(Integer.parseInt(student.getCourseYear()));
+                    UserLoginPOJO.setStudentCourse(student.getCourseName());
 
-                UserLoginPOJO.setUserFullName(student.getFirstName()+" "+ student.getLastName());
-                UserLoginPOJO.setUserID(student.getId());
-                UserLoginPOJO.setStudentYear(Integer.parseInt(student.getCourseYear()));
-                UserLoginPOJO.setStudentCourse(student.getCourseName());
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage_Student.fxml"));
+                    Parent root = loader.load();
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage_Student.fxml"));
-                Parent root = loader.load();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("");
+                    alert.setHeaderText("Student user doesn't exist OR wrong password");
+                    alert.show();
+                }
             } else {
-                throw new Exception("Wrong password");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText("Student user doesn't exist OR wrong password");
+                alert.show();
             }
         } else if (myChoiceBox.getValue().toString().equals("Lecturer")) {
             lecturer = null;
@@ -141,30 +158,37 @@ public class LoginController implements Initializable {
                         result.getString("emailAddress"), result.getString("idlecturer"), result.getString("password"));
             }
 
-
-            if (lecturer.getPassword().equals(password) && lecturer.getId().equals(userId)) {
-
-
-                UserLoginPOJO.setUserID(lecturer.getId());
-                UserLoginPOJO.setUserFullName(lecturer.getFirstName() + " " + lecturer.getLastName());
+            if (lecturer != null) {
+                if (lecturer.getPassword().equals(password) && lecturer.getId().equals(userId)) {
 
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage_Lecturer.fxml"));
-                Parent root = loader.load();
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                System.setProperty("userId", lecturer.getId());
-                scene = new Scene(root);
-                stage.setScene(scene);
+                    UserLoginPOJO.setUserID(lecturer.getId());
+                    UserLoginPOJO.setUserFullName(lecturer.getFirstName() + " " + lecturer.getLastName());
 
-                stage.show();
 
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage_Lecturer.fxml"));
+                    Parent root = loader.load();
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    System.setProperty("userId", lecturer.getId());
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+
+                    stage.show();
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("");
+                    alert.setHeaderText("Lecturer user doesn't exist OR wrong password");
+                    alert.show();
+                }
             } else {
-                throw new Exception("Wrong password");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("");
+                alert.setHeaderText("Lecturer user doesn't exist OR wrong password");
+                alert.show();
             }
         }
     }
-
-
 
 
     public Admin getAdmin() {
@@ -190,7 +214,6 @@ public class LoginController implements Initializable {
     private void setLecturer(Lecturer lecturer) {
         this.lecturer = lecturer;
     }
-
 
 
 }

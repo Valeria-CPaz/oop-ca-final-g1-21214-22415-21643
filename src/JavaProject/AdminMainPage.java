@@ -73,8 +73,8 @@ public class AdminMainPage implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        genderLecturer.getItems().addAll("Male", "Female", "Prefer not to say");
-        genderStudent.getItems().addAll("Male", "Female", "Prefer not to say");
+        genderLecturer.getItems().addAll("Male", "Female");
+        genderStudent.getItems().addAll("Male", "Female");
         studentIsPaid.getItems().addAll("Yes", "No");
         createModuleAddWeekDay.getItems().addAll(weekdays);
 
@@ -303,6 +303,8 @@ public class AdminMainPage implements Initializable {
         alert.setTitle("");
         alert.setHeaderText("Lecturer created");
         alert.show();
+
+        createModuleAddLecturer.getItems().add(createLecturerId.getText());
 
         lecturerFirstName.clear();
         lecturerLastName.clear();

@@ -1,5 +1,23 @@
 package JavaProject;
 
+/*
+
+DORSET COLLEGE
+
+OBJECT ORIENTED PROGRAMING - CA3
+
+Lecturer: John Rowley
+
+STUDENTS:
+Marcus Vinicius de Freitas Moura – 22415
+Valeria Cardoso da Paz – 21214
+Alexson Oliveira Silva – 21643
+
+
+
+
+ */
+
 import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -180,9 +198,10 @@ public class MainPageStudent implements Initializable {
         Class.forName(UsefulVariables.CLASS_INFO);
 
 
-        String sql1 = "select * from courseYear WHERE year = ?";
+        String sql1 = "select * from courseYear WHERE year = ? AND course = ?";
         UsefulVariables.getModules = UsefulVariables.con.prepareStatement(sql1);
         UsefulVariables.getModules.setInt(1, studentYear);
+        UsefulVariables.getModules.setString(2, studentCourse);
         ResultSet resultModulesinYear = UsefulVariables.getModules.executeQuery();
 
         ArrayList<String> allModules = new ArrayList<>();
@@ -458,11 +477,12 @@ public class MainPageStudent implements Initializable {
         Class.forName(UsefulVariables.CLASS_INFO);
 
 
-        String sql1 = "Select moduleName from courseYear WHERE year = ?";
+        String sql1 = "Select moduleName from courseYear WHERE year = ? AND course = ?";
 
         PreparedStatement statementOne = UsefulVariables.con.prepareStatement(sql1);
 
         statementOne.setInt(1, studentYear);
+        statementOne.setString(2, studentCourse);
         ResultSet resultOne = statementOne.executeQuery();
 
         PreparedStatement statementTwo;

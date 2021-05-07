@@ -1,5 +1,23 @@
 package JavaProject.tableviewPOJO;
 
+/*
+
+DORSET COLLEGE
+
+OBJECT ORIENTED PROGRAMING - CA3
+
+Lecturer: John Rowley
+
+STUDENTS:
+Marcus Vinicius de Freitas Moura – 22415
+Valeria Cardoso da Paz – 21214
+Alexson Oliveira Silva – 21643
+
+
+
+
+ */
+
 import javafx.beans.property.SimpleStringProperty;
 
 public class ModuleMaster {
