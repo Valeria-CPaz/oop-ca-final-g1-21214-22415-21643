@@ -12,6 +12,7 @@
 The link to the official websites to download all the libraries and connectors necessary to run the application are described bellow. However, in this link you'll be able to download them as well. 
 
 ALSO, THE FINAL REPORT OF THE PROJECT IS INCLUDED IN THE LINK BELLOW:
+
 https://1drv.ms/f/s!Akdmy55W8FRClhwX3_jjA-cvMHq-
 
 
