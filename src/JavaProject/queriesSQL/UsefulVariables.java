@@ -94,6 +94,7 @@ public class UsefulVariables {
 
 
 
+
     public UsefulVariables() throws SQLException {
     }
 }

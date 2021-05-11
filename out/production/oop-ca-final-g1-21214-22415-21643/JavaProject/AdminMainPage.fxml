@@ -226,7 +226,7 @@
                         <Button fx:id="btnAddPayment" layoutX="451.0" layoutY="404.0" mnemonicParsing="false" onAction="#addPayments" text="ADD PAYMENT" />
                         <Label fx:id="numberInstallmentsToAdd" layoutX="346.0" layoutY="99.0" textFill="WHITE" />
                         <ChoiceBox fx:id="studentsInDebt" layoutX="522.0" layoutY="50.0" prefHeight="25.0" prefWidth="100.0" />
-                        <Label fx:id="labelAmountOfInstallments" layoutX="346.0" layoutY="99.0" textFill="WHITE" />
+                        <Label fx:id="labelAmountOfInstallments" layoutX="386.0" layoutY="99.0" textFill="WHITE" />
                      </children>
                   </AnchorPane>
               </content>

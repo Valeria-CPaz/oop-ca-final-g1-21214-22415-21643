@@ -233,7 +233,7 @@ public class AdminMainPage implements Initializable {
 
             try {
                 labelAmountOfInstallments.setText(String.format
-                        ("The student has to pay %d left to be paid", getAmountOfPayments(studentId)));
+                        ("The student has to pay %d more installments", getAmountOfPayments(studentId)));
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException throwables) {
@@ -353,18 +353,7 @@ public class AdminMainPage implements Initializable {
         studentsInDebt.getItems().remove(insertStudentId.getText());
 
 
-        insertStudentFirstName.clear();
-        insertStudentLastName.clear();
-        genderStudent.getSelectionModel().clearSelection();
-        insertStudentPhone.clear();
-        studentdobInsert.getEditor().clear();
-        studentEmailInsert.clear();
-        insertStudentId.clear();
-        studentPasswordInsert.clear();
-        studentInBranch.getSelectionModel().clearSelection();
-        studentInCourse.getSelectionModel().clearSelection();
-        addStudentCourseYear.getSelectionModel().clearSelection();
-        studentIsPaid.getSelectionModel().clearSelection();
+        toClearInputs();
 
         refreshStudentTable();
 
@@ -480,12 +469,7 @@ public class AdminMainPage implements Initializable {
         alert.setHeaderText("Module created");
         alert.show();
 
-        createModuleAddWeekDay.getSelectionModel().clearSelection();
-        createModuleAddLecturer.getSelectionModel().clearSelection();
-        ModuleInCourse.getSelectionModel().clearSelection();
-        createModuleName.clear();
-        createModuleAddBranch.getSelectionModel().clearSelection();
-        createModuleName.clear();
+        toClearInputs();
 
         refreshModule();
     }
@@ -730,7 +714,6 @@ public class AdminMainPage implements Initializable {
         createLecturerId.clear();
         lecturerpassword.clear();
 
-
         createCourseBranchChoice.getSelectionModel().clearSelection();
         courseNameInput.clear();
         coursePrice.clear();
@@ -741,6 +724,7 @@ public class AdminMainPage implements Initializable {
         createModuleName.clear();
         createModuleAddBranch.getSelectionModel().clearSelection();
         createModuleName.clear();
+        createModuleAddHour.clear();
 
         branchUnitInsert.clear();
         branchAddressInsert.clear();
@@ -749,6 +733,9 @@ public class AdminMainPage implements Initializable {
         courseYearInput.clear();
         courseYearNameInput.getSelectionModel().clearSelection();
         courseYearModuleInput.getSelectionModel().clearSelection();
+
+        courseYearBranchInput.setDisable(false);
+        courseYearNameInput.setDisable(false);
 
 
     }
@@ -1427,12 +1414,7 @@ public class AdminMainPage implements Initializable {
         alert.setHeaderText("Module edited");
         alert.show();
 
-        createModuleAddWeekDay.getSelectionModel().clearSelection();
-        createModuleAddLecturer.getSelectionModel().clearSelection();
-        ModuleInCourse.getSelectionModel().clearSelection();
-        createModuleName.clear();
-        createModuleAddBranch.getSelectionModel().clearSelection();
-        createModuleName.clear();
+        toClearInputs();
 
         refreshModule();
 
@@ -1532,9 +1514,19 @@ public class AdminMainPage implements Initializable {
             courseYearModuleInput.setValue(resultAllModules.getString("moduleName"));
             courseYearInput.setText(resultAllModules.getString("year"));
 
-
         }
 
+        String sql1 = "select * from module WHERE subject = ?";
+        UsefulVariables.getModules = UsefulVariables.con.prepareStatement(sql1);
+        UsefulVariables.getModules.setString(1, courseYearModuleInput.getValue());
+        ResultSet resultModule = UsefulVariables.getModules.executeQuery();
+
+        while (resultModule.next()){
+            courseYearBranchInput.setValue(resultModule.getString("collegeBranch"));
+        }
+
+        courseYearBranchInput.setDisable(true);
+        courseYearNameInput.setDisable(true);
 
     }
 
@@ -1680,7 +1672,7 @@ public class AdminMainPage implements Initializable {
             alert.show();
         } else {
             labelAmountOfInstallments.setText(String.format
-                    ("The student has to pay %d left to be paid", getAmountOfPayments(idStudent)));
+                    ("The student has to pay %d more installments", getAmountOfPayments(idStudent)));
             refreshPaymentLog(idStudent);
         }
 
